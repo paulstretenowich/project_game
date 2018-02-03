@@ -26,7 +26,7 @@ void OptionState::Init()
 //    title_dest.y = 50;
 
     fullscreen_off = TextureManager::LoadTextureImg("../images/menu/button.png");
-    fullscreen_off_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 100, 255, 255, 255, "Plein écran");
+    fullscreen_off_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Plein écran");
 //    fullscreen_off_src.x = fullscreen_off_src.y = 0;
 //    fullscreen_off_dest.w = 300;
 //    fullscreen_off_font_dest.w = fullscreen_off_dest.w*2/3;
@@ -38,7 +38,7 @@ void OptionState::Init()
 //    fullscreen_off_font_dest.y = size.y*4/8 - fullscreen_off_font_dest.h/2;
 
     fullscreen_on = TextureManager::LoadTextureImg("../images/menu/button.png");
-    fullscreen_on_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 100, 255, 255, 255, "Fenêtre");
+    fullscreen_on_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Fenêtre");
 //    fullscreen_on_src.x = fullscreen_on_src.y = 0;
 //    fullscreen_on_dest.w = 300;
 //    fullscreen_on_font_dest.w = fullscreen_on_dest.w*1/2;
@@ -50,7 +50,7 @@ void OptionState::Init()
 //    fullscreen_on_font_dest.y = size.y*4/8 - fullscreen_on_font_dest.h/2;
 
     back = TextureManager::LoadTextureImg("../images/menu/button.png");
-    back_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 100, 255, 255, 255, "Retour");
+    back_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Retour");
 
     selector = TextureManager::LoadTextureImg("../images/menu/menu_selector.png");
 //    std::cout << selector << std::endl;
@@ -221,14 +221,18 @@ void OptionState::Draw(Game* game)
 
     SDL_GetRendererOutputSize(Game::m_pRenderer, &size.x, &size.y);
 
+    int texW = 0;
+    int texH = 0;
+
 //    std::cout << "pwet" << std::endl;
     TextureManager::DrawBackground(game->m_pRenderer, background);
 
+    SDL_QueryTexture(title, NULL, NULL, &texW, &texH);
     title_src.x = title_src.y = 0;
-    title_dest.w = 400;
-    title_dest.h = 120;
+    title_dest.w = texW;//400;
+    title_dest.h = texH;//120;
     title_dest.x = size.x/2-title_dest.w/2;
-    title_dest.y = 50;
+    title_dest.y = 100;
     TextureManager::Draw(game->m_pRenderer, title, title_src, title_dest);
 
     fullscreen_button_src.x = fullscreen_button_src.y = 0;
@@ -239,12 +243,13 @@ void OptionState::Draw(Game* game)
 
     if (game->FullscreenMode())
     {
+        SDL_QueryTexture(fullscreen_on_font, NULL, NULL, &texW, &texH);
 //        std::cout << "on" << std::endl;
 //        fullscreen_on_src.x = fullscreen_on_src.y = 0;
 //        fullscreen_on_dest.w = 300;
-        fullscreen_on_font_dest.w = fullscreen_button_dest.w*1/2;
+        fullscreen_on_font_dest.w = texW;//fullscreen_button_dest.w*1/2;
 //        fullscreen_on_dest.h = 50;
-        fullscreen_on_font_dest.h = fullscreen_button_dest.h*2/3;
+        fullscreen_on_font_dest.h = texH;//fullscreen_button_dest.h*2/3;
 //        fullscreen_on_dest.x = size.x/2 - fullscreen_on_dest.w/2;
         fullscreen_on_font_dest.x = size.x/2 - fullscreen_on_font_dest.w/2;
 //        fullscreen_on_dest.y = size.y*7/16 - fullscreen_on_dest.h/2;
@@ -258,12 +263,13 @@ void OptionState::Draw(Game* game)
     }
     else
     {
+        SDL_QueryTexture(fullscreen_off_font, NULL, NULL, &texW, &texH);
 //        std::cout << "off" << std::endl;
 //        fullscreen_off_src.x = fullscreen_off_src.y = 0;
 //        fullscreen_off_dest.w = 300;
-        fullscreen_off_font_dest.w = fullscreen_button_dest.w*2/3;
+        fullscreen_off_font_dest.w = texW;//fullscreen_button_dest.w*2/3;
 //        fullscreen_off_dest.h = 50;
-        fullscreen_off_font_dest.h = fullscreen_button_dest.h*2/3;
+        fullscreen_off_font_dest.h = texH;//fullscreen_button_dest.h*2/3;
 //        fullscreen_off_dest.x = size.x/2 - fullscreen_off_dest.w/2;
         fullscreen_off_font_dest.x = size.x/2 - fullscreen_off_font_dest.w/2;
 //        fullscreen_off_dest.y = size.y*7/16 - fullscreen_off_dest.h/2;
@@ -276,11 +282,12 @@ void OptionState::Draw(Game* game)
 //        selector_dest.h = fullscreen_off_dest.h + 6;
     }
 
+    SDL_QueryTexture(back_font, NULL, NULL, &texW, &texH);
     back_src.x = back_src.y = 0;
     back_dest.w = 300;
-    back_font_dest.w = back_dest.w*1/2;
+    back_font_dest.w = texW;//back_dest.w*1/2;
     back_dest.h = 50;
-    back_font_dest.h = back_dest.h*2/3;
+    back_font_dest.h = texH;//back_dest.h*2/3;
     back_dest.x = size.x/2 - back_dest.w/2;
     back_font_dest.x = size.x/2 - back_font_dest.w/2;
     back_dest.y = size.y*9/16 - back_dest.h/2;

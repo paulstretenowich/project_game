@@ -39,4 +39,5 @@ void TextureManager::Draw(SDL_Renderer *renderer, SDL_Texture *tex, SDL_Rect src
 void TextureManager::DrawBackground(SDL_Renderer *renderer, SDL_Texture *tex)
 {
     SDL_RenderCopy(renderer, tex, NULL, NULL);
+//    SDL_DestroyTexture(tex);
 }
