@@ -1,24 +1,24 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+//#ifndef GAMEOBJECT_H
+//#define GAMEOBJECT_H
 
-#include "game.h"
+//#include "game.h"
 
-class GameObject
-{
-public:
-    GameObject(const char* texturesheet, int x, int y);
-    ~GameObject();
+//class GameObject
+//{
+//public:
+//    GameObject(const char* texturesheet, int x, int y);
+//    ~GameObject();
 
-    void Update();
-    void Render();
+//    void Update();
+//    void Render();
 
-private:
-    int xpos;
-    int ypos;
+//private:
+//    int xpos;
+//    int ypos;
 
-    SDL_Texture* objTexture;
-    SDL_Rect srcRect, destRect;
-//    SDL_Renderer* renderer;
-};
+//    SDL_Texture* objTexture;
+//    SDL_Rect srcRect, destRect;
+////    SDL_Renderer* renderer;
+//};
 
-#endif // GAMEOBJECT_H
+//#endif // GAMEOBJECT_H

@@ -1,6 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include <list>
+
 #include "game.h"
 
 class Menu
@@ -8,9 +10,22 @@ class Menu
 public:
     Menu();
 
-    void Draw();
+    void DrawMenu();
+
+    void DrawSubMenu();
+
+    std::vector<SDL_Rect> Move();
 
     SDL_Rect quit_buttonPosition() { return quit_button_dest; }
+    SDL_Rect play_buttonPosition() { return play_button_dest; }
+    SDL_Rect option_buttonPosition() { return option_button_dest; }
+
+    int position;
+
+    typedef void(Menu::*pwet)(void);
+
+//    void MoveRect(SDL_Rect rect, dest);
+
 //    SDL_Rect GetPosition(SDL_Rect *rect);
 
 protected:
@@ -21,6 +36,9 @@ SDL_Rect title_src, title_dest;
 
 SDL_Texture* quit_button, * quit_button_font;
 SDL_Rect quit_button_src, quit_button_dest, quit_button_font_src, quit_button_font_dest;
+
+SDL_Texture* contour;
+SDL_Rect contour_src, contour_dest;
 
 SDL_Texture* play_button, * play_button_font;
 SDL_Rect play_button_src, play_button_dest, play_button_font_src, play_button_font_dest;

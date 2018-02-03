@@ -16,6 +16,8 @@ set(
     SOURCES_FILES
     ${PROJECT_SOURCE_DIR}/main.cpp
     ${PROJECT_SOURCE_DIR}/game.cpp
+    ${PROJECT_SOURCE_DIR}/menustate.cpp
+    ${PROJECT_SOURCE_DIR}/optionstate.cpp
     ${PROJECT_SOURCE_DIR}/menu.cpp
     ${PROJECT_SOURCE_DIR}/texturemanager.cpp
     )
@@ -32,7 +34,7 @@ add_executable(
     ${SOURCES_FILES}
     )
 
-target_link_libraries (
+target_link_libraries(
     ${PROJECT_NAME}
     ${SDL2_LIBRARY}
     ${SDL2_IMAGE_LIBRARY}

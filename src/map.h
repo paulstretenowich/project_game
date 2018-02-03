@@ -1,27 +1,27 @@
-#ifndef MAP_H
-#define MAP_H
+//#ifndef MAP_H
+//#define MAP_H
 
-#include "game.h"
+//#include "game.h"
 
-class Map
-{
-public:
-    Map();
-    ~Map();
+//class Map
+//{
+//public:
+//    Map();
+//    ~Map();
 
-    void LoadMap(int arr[20][20]);
-    void DrawMap();
+//    void LoadMap(int arr[20][20]);
+//    void DrawMap();
 
-private:
+//private:
 
-    SDL_Rect src, dest;
-    SDL_Texture* dirt;
-    SDL_Texture* grass;
-    SDL_Texture* water;
-    SDL_Texture* wholemap;
+//    SDL_Rect src, dest;
+//    SDL_Texture* dirt;
+//    SDL_Texture* grass;
+//    SDL_Texture* water;
+//    SDL_Texture* wholemap;
 
-    int map[20][20];
+//    int map[20][20];
 
-};
+//};
 
-#endif // MAP_H
+//#endif // MAP_H

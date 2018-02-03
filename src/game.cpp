@@ -9,12 +9,13 @@
 #include <SDL2/SDL_mixer.h>
 
 #include "game.h"
-#include "menu.h"
-#include "texturemanager.h"
+#include "gamestate.h"
+//#include "menu.h"
+//#include "texturemanager.h"
 
-Menu* menu;
+//Menu* menu;
 
-SDL_Renderer* Game::renderer = nullptr;
+SDL_Renderer* Game::m_pRenderer = nullptr;
 
 Game::Game()
 {}
@@ -22,7 +23,7 @@ Game::Game()
 Game::~Game()
 {}
 
-void Game::init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen)
+void Game::Init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
     int flags = 0;
     if (fullscreen)
@@ -34,8 +35,8 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     {
         std::cout << "SDL Initialised!" << std::endl;
 
-        window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-        if (window)
+        m_pWindow = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+        if (m_pWindow)
         {
             std::cout << "Game Window created!" << std::endl;
         }
@@ -43,9 +44,10 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         {
             printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
         }
+//        SDL_SetWindowResizable(m_pWindow, SDL_TRUE);
 
-        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-        if (renderer)
+        m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED);
+        if (m_pRenderer)
         {
 //            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             std::cout << "Renderer created!" << std::endl;
@@ -63,13 +65,18 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 //            exit(1);
         }
 
-        menu = new Menu;
+        m_bFullscreen = fullscreen;
 
-        isRunning = true;
+        m_bRunning = true;
+
+//        menu = new Menu;
+
+//        isRunning = true;
     }
     else
     {
-        isRunning = false;
+        m_bRunning = false;
+//        isRunning = false;
     }
 
 //    SDL_Surface* tmpSurface = IMG_Load("../assets/fire_emblem_fates_inventory_screen.png");
@@ -80,85 +87,233 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
 }
 
-void Game::handleEvents()
+/*
+Our new functions, ChangeState() takes a pointer to a GameState as a parameter and then pushes that state onto the vector of pointers to GameStates, before that it uses the clean function to remove the old state from the stack.
+*/
+void Game::ChangeState(GameState* state)
 {
-    SDL_Event event;
-    SDL_PollEvent(&event);
-    switch (event.type)
+    // cleanup the current state
+    if ( !states.empty() )
     {
-        case SDL_QUIT:
-            isRunning = false;
-            break;
-        case SDL_MOUSEBUTTONDOWN:
-            switch (event.button.button)
-            {
-                case SDL_BUTTON_LEFT:
-//                    SDL_ShowSimpleMessageBox(0, "Mouse", "Left button was pressed!", window);
-                    if ((event.motion.x > menu -> quit_buttonPosition().x)
-                            && (event.motion.x < (menu -> quit_buttonPosition().x + menu -> quit_buttonPosition().w))
-                            && (event.motion.y > menu -> quit_buttonPosition().y)
-                            && (event.motion.y < (menu -> quit_buttonPosition().y + menu -> quit_buttonPosition().h)))
-                    {
-                        isRunning = false;
-                        break;
-                    }
-                    break;
-                case SDL_BUTTON_RIGHT:
-//                    SDL_ShowSimpleMessageBox(0, "Mouse", "Right button was pressed!", window);
-                    break;
-                default:
-//                    SDL_ShowSimpleMessageBox(0, "Mouse", "Some other button was pressed!", window);
-                    break;
-            }
-            break;
-        case SDL_MOUSEMOTION:
-        {
-            int mouseX = event.motion.x;
-            int mouseY = event.motion.y;
+        states.back()->Clean();
+        states.pop_back();
+    }
 
-            std::stringstream ss;
-            ss << "X: " << mouseX << " Y: " << mouseY;
+    // store and init the new state
+    states.push_back(state);
+    states.back()->Init();
+}
 
-            SDL_SetWindowTitle(window, ss.str().c_str());
-            break;
-        }
-        case SDL_KEYDOWN:
-            switch (event.key.keysym.sym)
-            {
-                case SDLK_ESCAPE:
-                    isRunning = false;
-                    break;
-            }
-            break;
-//        default:
-//            break;
+/*
+Whereas ChangeState() pushes a state onto the stack and removes the previous state, PushState() pauses the previous state before pushing a new state onto the stack, this state can then be removed and the previous state resumed. Extrememly useful for pausing.
+*/
+void Game::PushState(GameState* state)
+{
+    // pause current state
+    if ( !states.empty() )
+    {
+        states.back()->Pause();
+    }
+
+    // store and init the new state
+    states.push_back(state);
+    states.back()->Init();
+}
+
+/*
+Remove and resume previous state.
+*/
+void Game::PopState()
+{
+    // cleanup the current state
+    if ( !states.empty() )
+    {
+        states.back()->Clean();
+        states.pop_back();
+    }
+
+    // resume previous state
+    if ( !states.empty() )
+    {
+        states.back()->Resume();
     }
 }
 
-void Game::update()
+/*
+These functions have now been changed so that they simply allow the current state to handle things, states.back() refers to the last element on the stack (the current state)
+*/
+void Game::HandleEvents()
 {
 
-//    manager.update();
-//    std::cout << newPlayer.getComponent<PositionComponent>().x() << "," << newPlayer.getComponent<PositionComponent>().y() << std::endl;
-//    cnt++;
-//    std::cout << cnt << std::endl;
+    // let the state handle events
+    states.back()->HandleEvents(this);
+//    std::cout << "pwet" << std::endl;
 }
 
-void Game::render()
+
+void Game::Update()
 {
-    SDL_RenderClear(renderer);
-//    this is where we would add stuff to render
-//    SDL_RenderCopy(renderer, background_menuTex, NULL, NULL);
-    menu -> Draw();
-    SDL_RenderPresent(renderer);
+
+    // let the state update the game
+    states.back()->Update(this);
 }
 
-void Game::clean()
+void Game::Draw()
 {
-    SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);
-    Mix_CloseAudio();
-    TTF_Quit();
+    // let the state draw the screen
+    states.back()->Draw(this);
+    //SDL_Flip(m_pScreen);
+}
+
+void Game::Clean()
+{
+    while ( !states.empty() )
+    {
+        states.back()->Clean();
+        states.pop_back();
+    }
+
+    // shutdown SDL
+//    Mix_CloseAudio();
+//    TTF_Quit();
     SDL_Quit();
-    std::cout << "...Game Cleaned!" << std::endl;
+    std::cout << "Game Cleaned!" << std::endl;
 }
+
+
+
+//void Game::HandleEvents()  // take pointer out and remove function body
+//{
+//}
+
+//void Game::Update() // remove any previous code from old tutorials
+//{
+//}
+
+//void Game::Draw() // remove any previous code from old tutorials
+//{
+//    SDL_RenderPresent(m_pRenderer);
+//}
+
+//void Game::Clean() // remove any previous code from old tutorials
+//{
+//}
+
+
+
+//void Game::Clean()
+//{
+//}
+
+//                    switch (menu -> position)
+//                    {
+//                        case 1:
+//                            std::cout << menu -> position << std::endl;
+//                            void Game::handleEvents()
+//                            {
+//                                SDL_Event event;
+//                                SDL_PollEvent(&event);
+//                                switch (event.type)
+//                                {
+//                                    case SDL_QUIT:
+//                                        isRunning = false;
+//                                        break;
+//                                    case SDL_MOUSEBUTTONDOWN:
+//                                        switch (event.button.button)
+//                                        {
+//                                            case SDL_BUTTON_LEFT:
+//                            //                    SDL_ShowSimpleMessageBox(0, "Mouse", "Left button was pressed!", window);
+//                                                if ((event.motion.x > menu -> quit_buttonPosition().x)
+//                                                        && (event.motion.x < (menu -> quit_buttonPosition().x + menu -> quit_buttonPosition().w))
+//                                                        && (event.motion.y > menu -> quit_buttonPosition().y)
+//                                                        && (event.motion.y < (menu -> quit_buttonPosition().y + menu -> quit_buttonPosition().h)))
+//                                                {
+//                                                    isRunning = false;
+//                                                    break;
+//                                                }
+//                            //                    break;
+//                                            case SDL_BUTTON_RIGHT:
+//                            //                    SDL_ShowSimpleMessageBox(0, "Mouse", "Right button was pressed!", window);
+//                                                break;
+//                                            default:
+//                            //                    SDL_ShowSimpleMessageBox(0, "Mouse", "Some other button was pressed!", window);
+//                                                break;
+//                                        }
+//                                        break;
+//                                    case SDL_MOUSEMOTION:
+//                                    {
+//                                        int mouseX = event.motion.x;
+//                                        int mouseY = event.motion.y;
+
+//                                        std::stringstream ss;
+//                                        ss << "X: " << mouseX << " Y: " << mouseY;
+
+//                                        SDL_SetWindowTitle(window, ss.str().c_str());
+//                                        break;
+//                                    }
+//                                    case SDL_KEYUP:
+//                                        switch (event.key.keysym.sym)
+//                                        {
+//                                            case SDLK_ESCAPE:
+//                                                isRunning = false;
+//                                                break;
+//                                            case SDLK_UP:
+//                            //                    std::cout << "up" << std::endl;
+//                                                if (menu -> position > 0)
+//                                                {
+//                                                    menu -> position -= 1;
+//                                                    menu -> Move()[menu -> position];
+//                                                }
+//                            //                    isRunning = false;
+//                                                break;
+//                                            case SDLK_DOWN:
+//                            //                    std::cout << "down" << std::endl;
+//                                                if (menu -> position < 2)
+//                                                {
+//                                                    menu -> position += 1;
+//                                                    menu -> Move()[menu -> position];
+//                                                }
+//                            //                    isRunning = false;
+//                                                break;
+//                                            case SDLK_RETURN:
+//                            menu -> DrawSubMenu();
+//                            break;
+//                        case 2:
+//                            std::cout << menu -> position << std::endl;
+//                            isRunning = false;
+//                    }
+//            }
+//            break;
+////        default:
+////            break;
+//    }
+//}
+
+//void Game::update()
+//{
+
+////    manager.update();
+////    std::cout << newPlayer.getComponent<PositionComponent>().x() << "," << newPlayer.getComponent<PositionComponent>().y() << std::endl;
+////    cnt++;
+////    std::cout << cnt << std::endl;
+//}
+
+//void Game::render()
+//{
+//    SDL_RenderClear(renderer);
+////    this is where we would add stuff to render
+////    SDL_RenderCopy(renderer, background_menuTex, NULL, NULL);
+//    menu -> DrawMenu();
+////    menu -> DrawSubMenu();
+//    SDL_RenderPresent(renderer);
+//}
+
+//void Game::clean()
+//{
+//    SDL_DestroyWindow(window);
+//    SDL_DestroyRenderer(renderer);
+//    Mix_CloseAudio();
+//    TTF_Quit();
+//    SDL_Quit();
+//    std::cout << "...Game Cleaned!" << std::endl;
+//}

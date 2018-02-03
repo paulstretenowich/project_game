@@ -8,8 +8,8 @@ class TextureManager
 public:
     static SDL_Texture* LoadTextureImg(const char* fileName);
     static SDL_Texture* LoadTextureFont(const char* font, int size, int r, int g, int b, const char *text);
-    static void Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest);
-    static void DrawBackground(SDL_Texture* tex);
+    static void Draw(SDL_Renderer* renderer, SDL_Texture* tex, SDL_Rect src, SDL_Rect dest);
+    static void DrawBackground(SDL_Renderer* renderer, SDL_Texture* surface);
     static void Size(SDL_Texture *tex);
 };
 
