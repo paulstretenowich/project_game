@@ -18,7 +18,9 @@ set(
     ${PROJECT_SOURCE_DIR}/game.cpp
     ${PROJECT_SOURCE_DIR}/menustate.cpp
     ${PROJECT_SOURCE_DIR}/optionstate.cpp
-    ${PROJECT_SOURCE_DIR}/menu.cpp
+    ${PROJECT_SOURCE_DIR}/introstate.cpp
+    ${PROJECT_SOURCE_DIR}/deadstate.cpp
+#    ${PROJECT_SOURCE_DIR}/menu.cpp
     ${PROJECT_SOURCE_DIR}/texturemanager.cpp
     )
 

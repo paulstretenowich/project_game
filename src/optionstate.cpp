@@ -111,7 +111,16 @@ std::vector<SDL_Rect> OptionState::MoveSelector()
 
 void OptionState::Clean()
 {
-    printf("PauseState Clean Successful\n");
+    SDL_DestroyTexture(background);
+    SDL_DestroyTexture(fullscreen_off);
+    SDL_DestroyTexture(fullscreen_off_font);
+    SDL_DestroyTexture(fullscreen_on);
+    SDL_DestroyTexture(fullscreen_on_font);
+    SDL_DestroyTexture(back);
+    SDL_DestroyTexture(back_font);
+    SDL_DestroyTexture(title);
+    SDL_DestroyTexture(selector);
+    printf("OptionState Clean Successful\n");
 }
 
 void OptionState::Resume(){}
@@ -129,6 +138,48 @@ void OptionState::HandleEvents(Game* game)
             case SDL_QUIT:
                 game->Quit();
                 break;
+
+        case SDL_MOUSEBUTTONDOWN:
+            switch (event.button.button)
+            {
+                case SDL_BUTTON_LEFT:
+        //                    SDL_ShowSimpleMessageBox(0, "Mouse", "Left button was pressed!", window);
+                    if ((event.motion.x > OptionState::fullscreen_buttonPosition().x)
+                            && (event.motion.x < (OptionState::fullscreen_buttonPosition().x + OptionState::fullscreen_buttonPosition().w))
+                            && (event.motion.y > OptionState::fullscreen_buttonPosition().y)
+                            && (event.motion.y < (OptionState::fullscreen_buttonPosition().y + OptionState::fullscreen_buttonPosition().h)))
+                    {
+                        OptionState::position = 0;
+                        OptionState::MoveSelector()[OptionState::position];
+                        if (game->FullscreenMode())
+                        {
+                            std::cout << "on" << std::endl;
+                            game->FullscreenOff();
+                            SDL_SetWindowFullscreen(game->GetWindow(), 0);
+    //                            game->Init("StateManager", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 720, false);
+                        }
+                        else if (!game->FullscreenMode())
+                        {
+                            std::cout << "off" << std::endl;
+                            game->FullscreenOn();
+                            SDL_SetWindowFullscreen(game->GetWindow(), SDL_WINDOW_FULLSCREEN_DESKTOP);
+    //                                    std::cout << OptionState::MoveSelector()[OptionState::position].x << std::endl;
+    //                            game->Init("StateManager", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 720, true);
+                        }
+                        break;
+                    }
+                    else if ((event.motion.x > OptionState::back_buttonPosition().x)
+                             && (event.motion.x < (OptionState::back_buttonPosition().x + OptionState::back_buttonPosition().w))
+                             && (event.motion.y > OptionState::back_buttonPosition().y)
+                             && (event.motion.y < (OptionState::back_buttonPosition().y + OptionState::back_buttonPosition().h)))
+                    {
+                        OptionState::position = 1;
+                        OptionState::MoveSelector()[OptionState::position];
+                        game->PopState();
+                        break;
+                    }
+                    break;
+            }
 
             case SDL_KEYUP:
                 switch (event.key.keysym.sym)
@@ -161,7 +212,7 @@ void OptionState::HandleEvents(Game* game)
             //                    isRunning = false;
                         break;
 //                    case SDLK_RETURN:
-//                        switch (MenuState::position)
+//                        switch (OptionState::position)
 //                        {
 //                            case 0:
 //                                std::cout << "play" << std::endl;

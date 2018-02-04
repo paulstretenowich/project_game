@@ -174,8 +174,8 @@ void Game::Clean()
     }
 
     // shutdown SDL
-//    Mix_CloseAudio();
-//    TTF_Quit();
+    Mix_CloseAudio();
+    TTF_Quit();
     SDL_Quit();
     std::cout << "Game Cleaned!" << std::endl;
 }

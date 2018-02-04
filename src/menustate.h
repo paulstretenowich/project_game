@@ -36,8 +36,8 @@ protected:
 
     SDL_Texture* background;
 
-    SDL_Texture* title;
-    SDL_Rect title_src, title_dest;
+    SDL_Texture* title, * title2;
+    SDL_Rect title_src, title_dest, title2_src, title2_dest;
 
     SDL_Texture* quit_button, * quit_button_font;
     SDL_Rect quit_button_src, quit_button_dest, quit_button_font_src, quit_button_font_dest;

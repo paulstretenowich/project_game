@@ -12,6 +12,8 @@
 #include "game.h"
 #include "menustate.h"
 #include "optionstate.h"
+#include "introstate.h"
+#include "deadstate.h"
 #include "texturemanager.h"
 
 MenuState MenuState::m_MenuState;
@@ -20,7 +22,7 @@ MenuState MenuState::m_MenuState;
 void MenuState::Init()
 {
     Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024);
-    Mix_Music* background_menu_music = Mix_LoadMUS("../music/menu_music.ogg");
+    Mix_Music* background_menu_music = Mix_LoadMUS("../music/new_music_menu_10dB.ogg");
     Mix_PlayMusic(background_menu_music, -1);
 
 //    SDL_GetRendererOutputSize(Game::m_pRenderer, &size.x, &size.y);
@@ -70,7 +72,8 @@ void MenuState::Init()
 //    option_button_dest.y = size.y*4/8 - option_button_dest.h/2;
 //    option_button_font_dest.y = size.y*4/8 - option_button_font_dest.h/2;
 
-    title = TextureManager::LoadTextureFont("../fonts/The_Wild_Breath_of_Zelda.otf", 100, 0, 0, 0, "Titre du jeu");
+    title = TextureManager::LoadTextureFont("../fonts/Triforce.ttf", 60, 0, 0, 0, "La Legende de Dora");
+    title2 = TextureManager::LoadTextureFont("../fonts/Triforce.ttf", 40, 0, 0, 0, "l'exploratrice ?");
 //    title_src.x = title_src.y = 0;
 //    title_dest.w = 400;
 //    title_dest.h = 120;
@@ -87,6 +90,7 @@ void MenuState::Init()
 std::vector<SDL_Rect> MenuState::MoveSelector()
 {
     std::vector<SDL_Rect> vecOfRec;
+    vecOfRec.clear();
     SDL_Rect play;
     play.x = MenuState::play_buttonPosition().x - 3;
     play.y = MenuState::play_buttonPosition().y - 3;
@@ -112,7 +116,18 @@ std::vector<SDL_Rect> MenuState::MoveSelector()
 
 void MenuState::Clean()
 {
+    Mix_HaltMusic();
     Mix_CloseAudio();
+    SDL_DestroyTexture(background);
+    SDL_DestroyTexture(quit_button);
+    SDL_DestroyTexture(quit_button_font);
+    SDL_DestroyTexture(option_button);
+    SDL_DestroyTexture(option_button_font);
+    SDL_DestroyTexture(play_button);
+    SDL_DestroyTexture(play_button_font);
+    SDL_DestroyTexture(title);
+    SDL_DestroyTexture(title2);
+    SDL_DestroyTexture(selector);
     printf("MenuState Clean Successful\n");
 }
 
@@ -169,6 +184,7 @@ void MenuState::HandleEvents(Game* game) //put our exit function back in busines
                         {
                             MenuState::position = 0;
                             MenuState::MoveSelector()[MenuState::position];
+                            game->ChangeState(IntroState::Instance());
                             std::cout << "play" << std::endl;
                             break;
                         }
@@ -221,6 +237,7 @@ void MenuState::HandleEvents(Game* game) //put our exit function back in busines
                         {
                             case 0:
                                 std::cout << "play" << std::endl;
+                                game->ChangeState(IntroState::Instance());
                                 break;
 
                             case 1:
@@ -302,8 +319,15 @@ void MenuState::Draw(Game* game)
     title_dest.w = texW;//400;
     title_dest.h = texH;//120;
     title_dest.x = size.x/2-title_dest.w/2;
-    title_dest.y = 100;
+    title_dest.y = size.y*1/9;
+    SDL_QueryTexture(title2, NULL, NULL, &texW, &texH);
+    title2_src.x = title2_src.y = 0;
+    title2_dest.w = texW;//400;
+    title2_dest.h = texH;//120;
+    title2_dest.x = size.x/2-title2_dest.w/2;
+    title2_dest.y = title_dest.y + title_dest.h*10/9;
     TextureManager::Draw(game->m_pRenderer, title, title_src, title_dest);
+    TextureManager::Draw(game->m_pRenderer, title2, title2_src, title2_dest);
 
     selector_src.x = selector_src.y = 0;
     TextureManager::Draw(game->m_pRenderer, selector, selector_src, MoveSelector()[position]);
