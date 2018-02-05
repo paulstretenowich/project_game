@@ -72,8 +72,8 @@ void MenuState::Init()
 //    option_button_dest.y = size.y*4/8 - option_button_dest.h/2;
 //    option_button_font_dest.y = size.y*4/8 - option_button_font_dest.h/2;
 
-    title = TextureManager::LoadTextureFont("../fonts/Triforce.ttf", 60, 0, 0, 0, "La Legende de Dora");
-    title2 = TextureManager::LoadTextureFont("../fonts/Triforce.ttf", 40, 0, 0, 0, "l'exploratrice ?");
+    title = TextureManager::LoadTextureFont("../fonts/Triforce.ttf", 60, 0, 0, 0, "La Legende de Dora...");
+    title2 = TextureManager::LoadTextureFont("../fonts/Triforce.ttf", 40, 0, 0, 0, "...l'exploratrice ?");
 //    title_src.x = title_src.y = 0;
 //    title_dest.w = 400;
 //    title_dest.h = 120;

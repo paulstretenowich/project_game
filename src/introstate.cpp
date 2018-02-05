@@ -33,6 +33,9 @@ void IntroState::Init()
 
     text1 = TextureManager::LoadTextureFontStory("Il était une fois...\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n\n\n\n\nAppuyer sur <SPACE> pour continuer...", size);
     text2 = TextureManager::LoadTextureFontStory("Pwet!!!!!!!!!!!!!!", size);
+
+    text_selector = 0;
+
     printf("IntroState Init Successful\n");
 }
 
