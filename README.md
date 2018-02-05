@@ -2,6 +2,25 @@
 
 Dans le cadre d'un cours de c++ (ISBS3), ce projet consiste en la création d'un jeu vidéo en c++ et se basant sur la librairie SDL2.
 
+## Pour exécuter le jeu
+
+### Windows
+Lancer le fichier la_legende_de_Dora.exe
+
+### MacOsX
+* Installer les fichiers .dmg en suivant le README de chacun
+* Lancer la_legende_de_Dora
+
+### Linux
+* Installer les libraires SDL2 :
+```
+sudo apt-get install libsdl2-dev
+sudo apt-get install libsdl2-ttf-dev
+sudo apt-get install libsdl2-image-dev
+sudo apt-get install libsdl2-mixer-dev
+```
+* Lancer la_legende_de_Dora
+
 ## Edité avec
 
 * [C++](http://www.cplusplus.com/) - Langage de programmation utilisé
