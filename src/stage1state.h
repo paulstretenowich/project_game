@@ -1,14 +1,13 @@
-#ifndef INTROSTATE_H
-#define INTROSTATE_H
+#ifndef STAGE1STATE_H
+#define STAGE1STATE_H
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "gamestate.h"
-#include <stdlib.h>
 
-class IntroState : public GameState
+class Stage1State : public GameState
 {
 public:
     void Init();
@@ -25,19 +24,11 @@ public:
 
     int text_selector;
 
-//    static int life;
-
-//    void GenerateLife() { life = rand() % 10 + 4; }
-
-//    void ModifyLife(int injury) { life -= injury; }
-
-//    static int* CheckLife() { return &life; }
-
     // Implement Singleton Pattern
-    static IntroState* Instance() { return &m_IntroState; }
+    static Stage1State* Instance() { return &m_Stage1State; }
 
 protected:
-    IntroState() {}
+    Stage1State() {}
 
     SDL_Texture* next, * choice;
     SDL_Rect next_dest;
@@ -60,12 +51,10 @@ protected:
     SDL_Rect size;
 
 private:
-    static IntroState m_IntroState;
+    static Stage1State m_Stage1State;
 
     SDL_Texture* menuSprite;
 
-//    int life;
-
 };
 
-#endif // INTROSTATE_H
+#endif // STAGE1STATE_H

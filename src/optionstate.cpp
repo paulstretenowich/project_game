@@ -18,7 +18,7 @@ void OptionState::Init()
 //	background = NULL;
     background = TextureManager::LoadTextureImg("../images/menu/menu_background_new_002.png");
 
-    title = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 100, 0, 0, 0, "Options");
+    title = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 60, 0, 0, 0, "Options");
 //    title_src.x = title_src.y = 0;
 //    title_dest.w = 400;
 //    title_dest.h = 120;

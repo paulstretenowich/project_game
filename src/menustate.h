@@ -20,9 +20,10 @@ public:
     void Update(Game* game);
     void Draw(Game* game);
 
-    SDL_Rect quit_buttonPosition() { return quit_button_dest; }
     SDL_Rect play_buttonPosition() { return play_button_dest; }
+    SDL_Rect instruction_buttonPosition() { return instruction_button_dest; }
     SDL_Rect option_buttonPosition() { return option_button_dest; }
+    SDL_Rect quit_buttonPosition() { return quit_button_dest; }
 
     std::vector<SDL_Rect> MoveSelector();
 
@@ -41,6 +42,9 @@ protected:
 
     SDL_Texture* quit_button, * quit_button_font;
     SDL_Rect quit_button_src, quit_button_dest, quit_button_font_src, quit_button_font_dest;
+
+    SDL_Texture* instruction_button, * instruction_button_font;
+    SDL_Rect instruction_button_src, instruction_button_dest, instruction_button_font_src, instruction_button_font_dest;
 
     SDL_Texture* selector;
     SDL_Rect selector_src, selector_dest;

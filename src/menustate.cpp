@@ -14,6 +14,7 @@
 #include "optionstate.h"
 #include "introstate.h"
 #include "deadstate.h"
+#include "instructionstate.h"
 #include "texturemanager.h"
 
 MenuState MenuState::m_MenuState;
@@ -62,6 +63,9 @@ void MenuState::Init()
 
     option_button = TextureManager::LoadTextureImg("../images/menu/button.png");
     option_button_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Options");
+
+    instruction_button = TextureManager::LoadTextureImg("../images/menu/button.png");
+    instruction_button_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Instructions");
 //    option_button_src.x = option_button_src.y = 0;
 //    option_button_dest.w = 300;
 //    option_button_font_dest.w = option_button_dest.w*2/3;
@@ -97,6 +101,12 @@ std::vector<SDL_Rect> MenuState::MoveSelector()
     play.w = MenuState::play_buttonPosition().w + 6;
     play.h = MenuState::play_buttonPosition().h + 6;
     vecOfRec.push_back(play);
+    SDL_Rect instruction;
+    instruction.x = MenuState::instruction_buttonPosition().x - 3;
+    instruction.y = MenuState::instruction_buttonPosition().y - 3;
+    instruction.w = MenuState::instruction_buttonPosition().w + 6;
+    instruction.h = MenuState::instruction_buttonPosition().h + 6;
+    vecOfRec.push_back(instruction);
     SDL_Rect option;
     option.x = MenuState::option_buttonPosition().x - 3;
     option.y = MenuState::option_buttonPosition().y - 3;
@@ -225,7 +235,7 @@ void MenuState::HandleEvents(Game* game) //put our exit function back in busines
                         break;
                     case SDLK_DOWN:
             //                    std::cout << "down" << std::endl;
-                        if (MenuState::position < 2)
+                        if (MenuState::position < 3)
                         {
                             MenuState::position += 1;
                             MenuState::MoveSelector()[MenuState::position];
@@ -236,14 +246,19 @@ void MenuState::HandleEvents(Game* game) //put our exit function back in busines
                         switch (MenuState::position)
                         {
                             case 0:
-                                std::cout << "play" << std::endl;
+//                                std::cout << "play" << std::endl;
                                 game->ChangeState(IntroState::Instance());
                                 break;
 
                             case 1:
+                                game->PushState(InstructionState::Instance());
+                                break;
+
+                            case 2:
                                 game->PushState(OptionState::Instance());
                                 break;
-                            case 2:
+
+                            case 3:
                                 game->Quit();
                                 break;
                         }
@@ -275,19 +290,6 @@ void MenuState::Draw(Game* game)
 //    std::cout << "pwet" << std::endl;
     TextureManager::DrawBackground(game->m_pRenderer, background);
 
-    SDL_QueryTexture(quit_button_font, NULL, NULL, &texW, &texH);
-    quit_button_src.x = quit_button_src.y = 0;
-    quit_button_dest.w = 300;
-    quit_button_font_dest.w = texW;//quit_button_dest.w*2/3;
-    quit_button_dest.h = 50;
-    quit_button_font_dest.h = texH;//quit_button_dest.h*2/3;
-    quit_button_dest.x = size.x/2 - quit_button_dest.w/2;
-    quit_button_font_dest.x = size.x/2 - quit_button_font_dest.w/2;
-    quit_button_dest.y = size.y*5/8 - quit_button_dest.h/2;
-    quit_button_font_dest.y = size.y*5/8 - quit_button_font_dest.h/2;
-    TextureManager::Draw(game->m_pRenderer, quit_button, quit_button_src, quit_button_dest);
-    TextureManager::Draw(game->m_pRenderer, quit_button_font, quit_button_src, quit_button_font_dest);
-
     SDL_QueryTexture(play_button_font, NULL, NULL, &texW, &texH);
     play_button_src.x = play_button_src.y = 0;
     play_button_dest.w = 300;
@@ -296,10 +298,23 @@ void MenuState::Draw(Game* game)
     play_button_font_dest.h = texH;//play_button_dest.h*2/3;
     play_button_dest.x = size.x/2 - play_button_dest.w/2;
     play_button_font_dest.x = size.x/2 - play_button_font_dest.w/2;
-    play_button_dest.y = size.y*3/8 - play_button_dest.h/2;
-    play_button_font_dest.y = size.y*3/8 - play_button_font_dest.h/2;
+    play_button_dest.y = size.y*4/10 - play_button_dest.h/2;
+    play_button_font_dest.y = size.y*4/10 - play_button_font_dest.h/2;
     TextureManager::Draw(game->m_pRenderer, play_button, play_button_src, play_button_dest);
     TextureManager::Draw(game->m_pRenderer, play_button_font, play_button_src, play_button_font_dest);
+
+    SDL_QueryTexture(instruction_button_font, NULL, NULL, &texW, &texH);
+    instruction_button_src.x = instruction_button_src.y = 0;
+    instruction_button_dest.w = 300;
+    instruction_button_font_dest.w = texW;//instruction_button_dest.w*2/3;
+    instruction_button_dest.h = 50;
+    instruction_button_font_dest.h = texH;//instruction_button_dest.h*2/3;
+    instruction_button_dest.x = size.x/2 - instruction_button_dest.w/2;
+    instruction_button_font_dest.x = size.x/2 - instruction_button_font_dest.w/2;
+    instruction_button_dest.y = size.y*5/10 - instruction_button_dest.h/2;
+    instruction_button_font_dest.y = size.y*5/10 - instruction_button_font_dest.h/2;
+    TextureManager::Draw(game->m_pRenderer, instruction_button, instruction_button_src, instruction_button_dest);
+    TextureManager::Draw(game->m_pRenderer, instruction_button_font, instruction_button_src, instruction_button_font_dest);
 
     SDL_QueryTexture(option_button_font, NULL, NULL, &texW, &texH);
     option_button_src.x = option_button_src.y = 0;
@@ -309,10 +324,23 @@ void MenuState::Draw(Game* game)
     option_button_font_dest.h = texH;//option_button_dest.h*2/3;
     option_button_dest.x = size.x/2 - option_button_dest.w/2;
     option_button_font_dest.x = size.x/2 - option_button_font_dest.w/2;
-    option_button_dest.y = size.y*4/8 - option_button_dest.h/2;
-    option_button_font_dest.y = size.y*4/8 - option_button_font_dest.h/2;
+    option_button_dest.y = size.y*6/10 - option_button_dest.h/2;
+    option_button_font_dest.y = size.y*6/10 - option_button_font_dest.h/2;
     TextureManager::Draw(game->m_pRenderer, option_button, option_button_src, option_button_dest);
     TextureManager::Draw(game->m_pRenderer, option_button_font, option_button_src, option_button_font_dest);
+
+    SDL_QueryTexture(quit_button_font, NULL, NULL, &texW, &texH);
+    quit_button_src.x = quit_button_src.y = 0;
+    quit_button_dest.w = 300;
+    quit_button_font_dest.w = texW;//quit_button_dest.w*2/3;
+    quit_button_dest.h = 50;
+    quit_button_font_dest.h = texH;//quit_button_dest.h*2/3;
+    quit_button_dest.x = size.x/2 - quit_button_dest.w/2;
+    quit_button_font_dest.x = size.x/2 - quit_button_font_dest.w/2;
+    quit_button_dest.y = size.y*7/10 - quit_button_dest.h/2;
+    quit_button_font_dest.y = size.y*7/10 - quit_button_font_dest.h/2;
+    TextureManager::Draw(game->m_pRenderer, quit_button, quit_button_src, quit_button_dest);
+    TextureManager::Draw(game->m_pRenderer, quit_button_font, quit_button_src, quit_button_font_dest);
 
     SDL_QueryTexture(title, NULL, NULL, &texW, &texH);
     title_src.x = title_src.y = 0;

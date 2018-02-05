@@ -24,12 +24,53 @@ SDL_Texture* TextureManager::LoadTextureFont(const char* font, int size, int r, 
     return tex;
 }
 
+SDL_Texture* TextureManager::LoadTextureFontInstruction(const char* text, SDL_Rect size)
+{
+//    std::cout << font << std::endl;
+    TTF_Font* tmp_font = TTF_OpenFont("../fonts/almendra/Almendra-Regular.ttf", 23);
+    SDL_Color tmp_color = {0, 0, 0};
+    SDL_Surface* tempSurface = TTF_RenderUTF8_Blended_Wrapped(tmp_font, text, tmp_color, size.x-40);
+    SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::m_pRenderer, tempSurface);
+    SDL_FreeSurface(tempSurface);
+    TTF_CloseFont(tmp_font);
+
+    return tex;
+}
+
 SDL_Texture* TextureManager::LoadTextureFontStory(const char* text, SDL_Rect size)
 {
 //    std::cout << font << std::endl;
     TTF_Font* tmp_font = TTF_OpenFont("../fonts/almendra/Almendra-Regular.ttf", 23);
     SDL_Color tmp_color = {240, 240, 240};
     SDL_Surface* tempSurface = TTF_RenderUTF8_Blended_Wrapped(tmp_font, text, tmp_color, size.x-40);
+    SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::m_pRenderer, tempSurface);
+    SDL_FreeSurface(tempSurface);
+    TTF_CloseFont(tmp_font);
+
+    return tex;
+}
+
+SDL_Texture* TextureManager::LoadTextureFontStoryNextPage()
+{
+//    std::cout << font << std::endl;
+    const char* text = "Appuyer sur <SPACE> pour continuer...";
+    TTF_Font* tmp_font = TTF_OpenFont("../fonts/almendra/Almendra-Regular.ttf", 18);
+    SDL_Color tmp_color = {255, 255, 0};
+    SDL_Surface* tempSurface = TTF_RenderUTF8_Blended(tmp_font, text, tmp_color);
+    SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::m_pRenderer, tempSurface);
+    SDL_FreeSurface(tempSurface);
+    TTF_CloseFont(tmp_font);
+
+    return tex;
+}
+
+SDL_Texture* TextureManager::LoadTextureFontStoryChoice()
+{
+//    std::cout << font << std::endl;
+    const char* text = "Appuyez sur le chiffre correspondant à votre choix...";
+    TTF_Font* tmp_font = TTF_OpenFont("../fonts/almendra/Almendra-Regular.ttf", 18);
+    SDL_Color tmp_color = {255, 255, 0};
+    SDL_Surface* tempSurface = TTF_RenderUTF8_Blended(tmp_font, text, tmp_color);
     SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::m_pRenderer, tempSurface);
     SDL_FreeSurface(tempSurface);
     TTF_CloseFont(tmp_font);
@@ -47,6 +88,19 @@ void TextureManager::Draw(SDL_Renderer *renderer, SDL_Texture *tex, SDL_Rect src
 {
     SDL_QueryTexture(tex, NULL, NULL, &src.w, &src.h);
     SDL_RenderCopy(renderer, tex, &src, &dest);
+}
+
+void TextureManager::DrawFontInstruction(SDL_Renderer *renderer, SDL_Texture *tex, SDL_Rect dest, SDL_Rect size)
+{
+    int texW = 0;
+    int texH = 0;
+    SDL_QueryTexture(tex, NULL, NULL, &texW, &texH);
+//    src.x = src.y = 0;
+    dest.w = texW;//400;
+    dest.h = texH;//120;
+    dest.x = size.x/2 - dest.w/2;
+    dest.y = size.y*4/12 - dest.h/2;
+    SDL_RenderCopy(renderer, tex, NULL, &dest);
 }
 
 SDL_Rect TextureManager::DrawBackgroundStory(SDL_Renderer *renderer, SDL_Texture *tex, SDL_Rect src, SDL_Rect dest, SDL_Rect size)
@@ -81,9 +135,35 @@ SDL_Rect TextureManager::DrawFontStory(SDL_Renderer *renderer, SDL_Texture *tex,
     dest.w = texW;//400;
     dest.h = texH;//120;
     dest.x = background_text_dest.x + 20;
-    dest.y = background_text_dest.y + 20;
+    dest.y = background_text_dest.y + 12;
     SDL_RenderCopy(renderer, tex, NULL, &dest);
     return dest;
+}
+
+void TextureManager::DrawFontStoryNextPage(SDL_Renderer *renderer, SDL_Texture *tex, SDL_Rect dest, SDL_Rect background_text_dest)
+{
+    int texW = 0;
+    int texH = 0;
+    SDL_QueryTexture(tex, NULL, NULL, &texW, &texH);
+//    src.x = src.y = 0;
+    dest.w = texW;//400;
+    dest.h = texH;//120;
+    dest.x = background_text_dest.x + 20;
+    dest.y = background_text_dest.y + background_text_dest.h - 40;
+    SDL_RenderCopy(renderer, tex, NULL, &dest);
+}
+
+void TextureManager::DrawFontStoryChoice(SDL_Renderer *renderer, SDL_Texture *tex, SDL_Rect dest, SDL_Rect background_text_dest)
+{
+    int texW = 0;
+    int texH = 0;
+    SDL_QueryTexture(tex, NULL, NULL, &texW, &texH);
+//    src.x = src.y = 0;
+    dest.w = texW;//400;
+    dest.h = texH;//120;
+    dest.x = background_text_dest.x + 20;
+    dest.y = background_text_dest.y + background_text_dest.h - 40;
+    SDL_RenderCopy(renderer, tex, NULL, &dest);
 }
 
 void TextureManager::DrawBackground(SDL_Renderer *renderer, SDL_Texture *tex)
