@@ -1,0 +1,28 @@
+ref 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Intro 
+Il était une fois  ... /n??? : Mais laisse moi donc parler et comment ça ???/n My name is Targaryen ... Aragorn Targaryen/nMais pourquoi je parle dans cette langue bizarre. Bon ecoute moi bien ! Oui, c'est bien à toi que je parle !/nT'as intérêt à bien faire gaffe à ce que tu fais parce que c'est moi que tu vas incarner pendant cette avanture/nJe vais lui rendre la parole sinon je vais me faire taper sur les doigts/n 
+
+Intro 2   
+Hum hum... Je disais donc vous êtes un héros qui voyage à travers les terres de l'extrême milieu/n Pour quelles raisons ? la gloire? la fortune? l'amour? Vous le déciderez avec vos choix tout au long de cette avanture/nC'est parti! Allons y let's go c'est parti les amis !
+
+Intro 3  
+Vous Vous réveillez en plein milieu d'une forêt mais vous ne vous rappelez plus de ce qui s'est passé avant/n(attention l'abus d'alcool est dangereux pour la santé)/n vous entendez des bruits au loin. Voyez une troupe de bandits qui se dirigent vers vous. Quel est votre décision ? 
+->2 choix 
+Choix1 
+Vous décidez de faire preuve de bravoure et vous allez engager de front les ennemis 
+mort instantnée
+Choix 2 
+Vous n'êtes pas un peureux (on le dira à personne) mais vous décidez tout de même d'aller vous cacher 
+->2 choix 
+Choix 2-1 
+Vous décidez d'attendre encore un peu comme vous l'a souvent répété votre maman : Prudence est mère de sûreté!
+random > 1
+if false 
+Manque de bol ! Un des bandits vous urine dessus sans faire exprès vous ne pouvez supporter l'affront!/n Vous arrivez à l'abattre mais vous ne faites pas long feu face à ces camarades 
+Choix 2-2
+Vous n'avez que faire des conseils de votre mère, vous n'avez plus 5 ans et vous décidez de sortir 
+random > 6
+if false 
+Quelle idée de se lancer seul contre une troupe ! Vous n'êtes pas un super héros !/n Aragorn : Je t'avais dit de faire attention ! Ah ces jeunes!
