@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
-project(Jeu_Video_dvlp)
+project(la_legende_de_Dora)
 
 set(
     CMAKE_MODULE_PATH

@@ -25,14 +25,6 @@ public:
 
     int text_selector;
 
-//    static int life;
-
-//    void GenerateLife() { life = rand() % 10 + 4; }
-
-//    void ModifyLife(int injury) { life -= injury; }
-
-//    static int* CheckLife() { return &life; }
-
     // Implement Singleton Pattern
     static IntroState* Instance() { return &m_IntroState; }
 
@@ -63,8 +55,6 @@ private:
     static IntroState m_IntroState;
 
     SDL_Texture* menuSprite;
-
-//    int life;
 
 };
 

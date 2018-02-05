@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <stdlib.h>
+#include <time.h>
 #include <vector>
 #include <sstream>
 
@@ -15,8 +16,12 @@
 #include "introstate.h"
 #include "deadstate.h"
 #include "stage1state.h"
+#include "global.h"
 
 IntroState IntroState::m_IntroState;
+int Global::life;
+
+//int life;
 
 void IntroState::Init()
 {
@@ -69,9 +74,9 @@ void IntroState::Init()
 
     text_selector = 0;
 
-//    IntroState::GenerateLife();
-//    int IntroState::life = rand() % 10 + 4;
-//    std::cout << life << std::endl;
+
+    Global::GenerateLife();
+    std::cout << Global::CheckLife() << std::endl;
 
     printf("IntroState Init Successful\n");
 }
@@ -156,7 +161,7 @@ void IntroState::HandleEvents(Game* game) //put our exit function back in busine
                                 break;
 //
                             case 3:
-                                int tmp_rand = rand() % 9 + 0;
+                                int tmp_rand = rand() % (9 - 0 + 1) + 0;
                                 if (tmp_rand > 1)
                                 {
 //                                    std::cout << "next state" << std::endl;
@@ -181,6 +186,7 @@ void IntroState::HandleEvents(Game* game) //put our exit function back in busine
                                 IntroState::text_selector += 1;
                                 break;
                         }
+                        break;
 
                     case SDLK_F1:
                         game->ChangeState(Stage1State::Instance());

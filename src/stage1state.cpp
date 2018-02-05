@@ -15,6 +15,7 @@
 #include "stage1state.h"
 #include "deadstate.h"
 #include "introstate.h"
+#include "global.h"
 
 Stage1State Stage1State::m_Stage1State;
 
@@ -71,7 +72,8 @@ void Stage1State::Init()
 
     text_selector = 0;
 
-//    std::cout << IntroState::life << std::endl;
+    Global::ModifyLife(2);
+    std::cout << Global::CheckLife() << std::endl;
 
     printf("Stage1State Init Successful\n");
 }
@@ -181,6 +183,7 @@ void Stage1State::HandleEvents(Game* game) //put our exit function back in busin
                                 Stage1State::text_selector += 1;
                                 break;
                         }
+                        break;
 
 //                    case SDLK_UP:
 //            //                    std::cout << "up" << std::endl;
