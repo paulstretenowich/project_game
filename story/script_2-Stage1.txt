@@ -1,0 +1,25 @@
+ref 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Partie 1 caeda
+Vous avez bravement échappé aux bandits. Vous décidez donc de poursuivre votre route.Le soleil est à son zénith.\n Vous voyez une personne au loin en train de dormir sous l'ombre d'un arbre. Que faites vous ?\n1. Vous l'ignorez complètement.\n2. Vous décidez de l'alléger un peu.\n3. Vous allez lui parler.\n4. Vous lui ôtez la vie et vous récupérez tout ce qui peut être utile
+
+Choix 2
+Vous vous faites prendra la main dans le sac. Elle vous met en fuite et vous blesse.
+blessure rand 1-3
+Choix  3 
+Il se trouve que c'est très charmante demoiselle,Siri, une aventurière tout comme vous./nEn preux chevalier, certes intéressé, vous lui proposez de l'accompagner un peu./n Elle accepte volontiers. Vous passez un excellent moment ensemble 
+Après avoir passer une magnifique nuit, vous vous réveillez seul.
+(Siri +1)
+Choix 4 
+Après avoir rendu son sommeil définitif, vous remarquez que c'était une jeune aventurière. Malgré une fouille très appronfondie, vous ne trouvez rien d'interessant.
+(Siri -1)
+
+Partie 2  
+if Siri = 1 
+Après un certain temps vous arrivez à une intersection.Vous vous rappelez de vos conversations avec Siri\n que la région montagneuse montrait des signes d'activités. Trois choix s'offre à vous :\n1. Vous décidez de continuer dans la forêt.\n2. Vous vous dirigez vers les côtes.\n3. Vous préferez les régions montagneuses.
+
+Else 
+Après un certain temps vous arrivez à une intersection.Trois choix s'offre à vous :\n1. Vous décidez de continuer dans la forêt.\n2. Vous vous dirigez vers les côtes.\n3. Vous préferez les régions montagneuses.
+
+
