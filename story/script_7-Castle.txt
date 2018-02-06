@@ -1,0 +1,15 @@
+ref 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Vous arrivez à vous infiltrer et à accéder la plus haute salle du donjon sans trop de difficulté.\nA croire que les réalisateurs en avaient marre au moment où ils ont écrit ce passage.\nVous y trouvez une personne encapuchonné et vous lui dites que vous êtes la pour la sauver.\nA ce moment la garde réagi et vous décidez de fuir au plus vite.\nVous apercevez devant la porte principale le comte Geralt Lannister qui vous défie.Vous vous battez à la loyale.C'etait un vaillant combattant mais vous arrivez à le défaire et vous fuyez 
+
+blessure 
+
+chagement background exté
+
+If Siri = 0
+Vous soulevez la capuche et vous y découvrez un visage aux traits finement ciselés. Vous apprenez que c'est la princesse Dora,héritières des terres de l'extrême milieu mais qu'elle vivre une vie pleine d'aventure, elle a donc décidé de fuir.\nVous décidez de la ramener au chateau. Le roi vous récompense en vous donnant la main de sa fille.\Vous mourrez quelques mois plus tard victime de manigances politiques. 
+
+
+else 
+Vous soulevez la capuche et vous y découvrez un visage familier: l'aventurière de la forêt.Vous apprenez que c'est la princesse Dora,héritières des terres de l'extrême milieu mais qu'elle vivre une vie pleine d'aventure, elle a donc décidé de fuir.\nVous décidez de la ramener au chateau. Le roi vous récompense en vous donnant la main de sa fille.\Vous mourrez quelques mois plus tard victime de manigances politiques. 

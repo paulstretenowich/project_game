@@ -1,0 +1,73 @@
+ref 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Partie 1 combat bateau 
+Vous êtes sur le bateau en direction de Niméa.\nVous entendez un bruit sourd et violent puis un cri retentissant A l'abordage, des pirates.\nVous vous précipitez sur le pont. Vous voyez le bateau pirate en abaordage en belle. Que faites vous ?\n1. Vous défendez vos positions.\n2. Vous essayez de les prendre à revers.
+
+Choix 1 
+Le combat est d'un violence rare, les deux côtés subissent des dégâts conséquents mais vous arrivez tout de même à\nles repousser. Vous subissez des dégâts non négligeables durant l'affrontement. 
+blessure 3-4
+
+Choix 2 
+rand >1 
+Quelle idée de génie, vous arrivez à détourner leur attention en mettent le feu à leur cale.\n Ils battent donc en retraite afin de sauver votre leur navire. Vous rejoignez votre navire en éliminant\n quelques pirates en déroute.
+Part 2
+ 
+else 
+Quelle idée d'aller se jeter dans la gueule du loup (des mers)!!!
+Death 
+
+Partie 2 
+Après cet éprouvante épreuve, le capitaine décide de faire un état du navire.Prudence est mère de sûreté, vous dit-il\n cela vous rappelle votre famille. Pendant la vérification, une passagère clandestine elle est amené sur le pont pour que son sort soit décidé
+changement boite de texte
+
+if Ciri =1 
+texte 1
+Vous reconnaissez la clanndestine,c'est Ciri la jeune aventurière avec que vous avez rencontrez dans la forêt.\nElle aussi se rappelle de vous et vous souris en réponse. Le capitaine remarque cet échange et dit :\nAragorn :  Oui c'est une amie très proche\nCapitaine :  Ainsi soit-il, si vous êtes une amie de messire, je ne peux me permettre de vous rendre la vie difficile
+
+
+changement boite de discussion 
+Aragorn : Comme on se retrouve !\nCiri : Je ne saurais comment vous remercier. Vous m'avez sauvé la vie !\nAragron :  Vous pourriez m'accompagner un peu pendant mon périple.\nCiri : Ce serais avec plaisir! 
+
+changement boite de discussion 
+text happy end 
+Vous faites amplement connaissance durant le reste du trajet, elle vous révèle qu'elle est la princesse Dora,\n héritières des terres de l'extrême milieu mais qu'elle vivre une vie pleine d'aventure, elle a donc décidé de fuir.\n Le destin vous donc a réunis pour partager une vie d'aventure et d'amour.
+
+
+elif Ciri =0
+Vous ne reconnaissez pas la charmante demoiselle, mais son visage vous dit quelque chose.\nVous la fixez pour essayer de vous rappeler de quelque chose.Le capitaine remarque ce regard et dit :\nCapitaine : Vous la connaissez messire Targaryen ?\nAragorn :  Non, enfin je ne pense pas.\nCapitaine : Nous pensions lui faire prendre la planche.
+
+changement boite
+texte question
+Que décidez vous de faire ?\n1. Vous décider de lui sauvez la vie en discutant avec le capitaine.\n2. Son sort ne vous interesse guère et vous laissez le capitaine faire ce qu'il veut.
+
+changement boite de discussion
+Choix 1
+La jeune demoiselle se présente sous le nom de Ciriet dit :\nCiri : Je ne saurais comment vous remercier. Vous m'avez sauvé la vie !\nAragron :  Vous pourriez m'accompagner un peu pendant mon périple.\nCiri : Ce serais avec plaisir!
+
+changement boite de discussion
+texte happy end
+
+Choix 2 
+texte mehending
+Vous retournez dzns votre cabine comme si de rien n'était et vous continuez vers votre vie pleine d'aventure.\nCependant un sentiment de vide s'empire de vous quand vous repensez à elle.
+
+
+else 
+
+Vous reconnaissez la clanndestine,c'est Ciri la jeune aventurière avec que vous avez rencontrez dans la forêt.\nElle aussi se rappelle de vous et vous fixe. Le capitaine remarque cet échange et dit :\nCapitaine : Vous la connaissez messire Targaryen ?\nAragorn : Oui,enfin c'est une juste une connaissance, nous nous somme juste croisés!\n
+Capitaine : Nous pensions lui faire prendre la planche.c
+
+
+changement boite de discussion
+texte question
+
+Choix1 
+Aragorn : Comme on se retrouve !\nCiri : Je ne saurais comment vous remercier. Vous m'avez sauvé la vie !\nAragron :  Vous pourriez m'accompagner un peu pendant mon périple... et aussi éviter de me frapper \nCiri sourit et dit: Ce serais avec plaisir!
+
+
+changement boite de discussion 
+texte happy end
+
+Choix 2  
+texte mehending
