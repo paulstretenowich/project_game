@@ -1,0 +1,14 @@
+ref 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+background brave forest
+
+Partie 1 combat 
+En vous enfonçant dans la forêt vous tombez nez à nez avec l'un de vos ennemis, un garde du comte Geralt \nQue faites vous ?\n1. Vous Fuyez\n2. Vous decidez de lacher une pluie de coups de poing\n3. Vous vous mettez en position prêt à réagir.
+Choix 1 
+Il a le temps d'alerter le reste de la garde. Ils vous rattrapent et vous torture jusqu'a votre mort.
+Choix 2 
+Vous arrivez à le maîtriser assez rapidement. Il vous blesse un peu pendant le combat.\nVous vous dirigez rapidement vers les côtes pour éviter d'alerter le reste de la garde.
+blessure rand  1-3
+Choix 3 
+Vous le voyez attaquer, comme vous êtes en position, vous êtes capable de le maîtriser sans subir de représailles\n Vous vous dirigez dans la direction opposée du chateau du comte, vers la mer.
+

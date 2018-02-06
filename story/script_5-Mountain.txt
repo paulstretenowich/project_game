@@ -1,0 +1,11 @@
+ref 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+background brave.png
+Partie 1 
+Vous arrivez au pied de la montagne. Vous ressentez quelques faibles secousses et vous voyez des chevaux au loin. Que faites vous?\n1. Vous continuez en direction de la montagne.\n2. Vous retournez vers la fôret.\n3. Vous allez vers la mer.
+
+Partie 2 
+changment background Volcano.png
+Vous arrivez en haut de la montagne. Le volcan, supposé éteint, entre dans une violente éruption.\n Les secousses que vous aviez senti au pied de la montagne étaient des des signes précurseurs. 
+Mort
