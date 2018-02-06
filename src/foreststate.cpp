@@ -15,6 +15,7 @@
 #include "foreststate.h"
 #include "deadstate.h"
 #include "introstate.h"
+#include "seatownstate.h"
 #include "global.h"
 
 ForestState ForestState::m_ForestState;
@@ -142,12 +143,14 @@ void ForestState::HandleEvents(Game* game) //put our exit function back in busin
                                 }
                                 else
                                 {
-                                    std::cout << "sea state" << std::endl;
+//                                    std::cout << "sea state" << std::endl;
+                                    game->ChangeState(SeaTownState::Instance());
                                 }
                                 break;
 
                             case 3:
-                                std::cout << "sea state" << std::endl;
+                                game->ChangeState(SeaTownState::Instance());
+//                                std::cout << "sea state" << std::endl;
                                 break;
 
                             case 4:

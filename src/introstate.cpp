@@ -19,6 +19,9 @@
 #include "stage1state.h"
 #include "foreststate.h"
 #include "mountainstate.h"
+#include "seatownstate.h"
+#include "seastate.h"
+#include "castlestate.h"
 #include "global.h"
 
 IntroState IntroState::m_IntroState;
@@ -221,9 +224,13 @@ void IntroState::HandleEvents(Game* game) //put our exit function back in busine
                         game->ChangeState(ForestState::Instance());
                         break;
 
-                case SDLK_F3:
-                    game->ChangeState(MountainState::Instance());
-                    break;
+                    case SDLK_F3:
+                        game->ChangeState(MountainState::Instance());
+                        break;
+
+                    case SDLK_F4:
+                        game->ChangeState(SeaTownState::Instance());
+                        break;
 
 //                    case SDLK_UP:
 //            //                    std::cout << "up" << std::endl;

@@ -1,0 +1,35 @@
+ref 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Background PlainSea
+
+if Siri=-2
+En traversant la ville vous entendez souvent le nom de la princesse Dora, héritière du royame de l'extrême milieu.\n Cette dernière est portée disparue,avec une grosse récompense pour celui qui la retrouvera. Vous décidez d'y jeter un oeil.\nCe que vous voyez vous glace le sang... Le portrait que vous voyez affiché ressemble comme deux gouttes d'eau\n à l'aventurière que vous avez tué dans la forêt.\n Vous décidez de partir en éxil pour éviter toute possibilités de représailles. 
+End
+
+Partie 1 
+En suivant la côte, vous arrivez à Marsalia, l'un des ports les plus foisonnats et corrompus de  la région.\nAyant eu affaire aux pires des cercles et vous avez donc quelques connaissances dans la ville\nVous décidez donc d'aller :\n1.A la taverne \n2.Au port \n3. A l'office du tourisme 
+
+Choix 1 
+Heal 2-3
+
+rand >=5
+A la Taverne, vous revoyez votre ami marin qui se détend entre deux voyages. Après avoir ressassé vos souvenirs\net partagé plusieurs bières,il vous propose de le suivre durant son prochain voyage a Niméa,un port du Gondor.
+Sea
+
+rand<5 
+A la Taverne,vous entendez dire que le comte Geralt Lannister aurait kidnappé une jeune demoiselle.\n Que voulez vous faire?\n1.Vous allez au secours de la demoiselle en détresse\n2. Ce sont ces affaitres, certes vous auriez aimé déranger les plans du Comte mais le jeu n'en vaut pas la chandelle. 
+Choix 1.1 
+castle state 
+
+Choix 1.2
+Sea state
+
+Choix 2 
+Au port, vous entendez parler d'un trésor non loin de la de Niméa,un port du Gondor.\nVous décidez de vous y rendre afin de tenter votre chance,\n vous vous dotez donc d'un billet pour Le premier bateau qui y va.\nCe dernier ne part que le lendemain matin, vous cherchez de quoi vous accomoder pour la nuit.\n
+
+Choix 3 
+
+Vous ne savez pas pourquoi mais vous êtes obsédé par le fait d'accéder à l'endroit appellé office de tourisme.\nVous en oubliez  votre famille, amis et proches. Vous y dillapidez vos deernières richesses.\n Vous le trouverez finalement après des années de recherches\net vous y mourrez dans ce qu'ils appellent une "file d'attente"
+
+

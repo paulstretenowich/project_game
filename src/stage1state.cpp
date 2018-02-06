@@ -16,6 +16,8 @@
 #include "deadstate.h"
 #include "introstate.h"
 #include "foreststate.h"
+#include "mountainstate.h"
+#include "seatownstate.h"
 #include "global.h"
 
 Stage1State Stage1State::m_Stage1State;
@@ -205,13 +207,13 @@ void Stage1State::HandleEvents(Game* game) //put our exit function back in busin
                                 break;
 
                             case 4:
-                                std::cout << "sea state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
+//                                std::cout << "sea state" << std::endl;
+                                    game->ChangeState(SeaTownState::Instance());
                                 break;
 
                             case 5:
-                                std::cout << "sea state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
+//                                std::cout << "sea state" << std::endl;
+                                    game->ChangeState(SeaTownState::Instance());
                                 break;
                         }
                         break;
@@ -224,13 +226,13 @@ void Stage1State::HandleEvents(Game* game) //put our exit function back in busin
                             break;
 
                         case 4:
-                            std::cout << "mountain state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
+//                            std::cout << "mountain state" << std::endl;
+                            game->ChangeState(MountainState::Instance());
                             break;
 
                         case 5:
-                            std::cout << "mountain state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
+//                            std::cout << "mountain state" << std::endl;
+                            game->ChangeState(MountainState::Instance());
                             break;
                     }
                     break;
@@ -243,48 +245,7 @@ void Stage1State::HandleEvents(Game* game) //put our exit function back in busin
                             break;
                     }
                     break;
-
-
-//                    case SDLK_UP:
-//            //                    std::cout << "up" << std::endl;
-//                        if (Stage1State::position > 0)
-//                        {
-//                            Stage1State::position -= 1;
-//                            Stage1State::MoveSelector()[Stage1State::position];
-//                        }
-//            //                    isRunning = false;
-//                        break;
-//                    case SDLK_DOWN:
-//            //                    std::cout << "down" << std::endl;
-//                        if (Stage1State::position < 2)
-//                        {
-//                            Stage1State::position += 1;
-//                            Stage1State::MoveSelector()[Stage1State::position];
-//                        }
-//            //                    isRunning = false;
-//                        break;
-//                    case SDLK_RETURN:
-//                        switch (Stage1State::position)
-//                        {
-//                            case 0:
-//                                std::cout << "play" << std::endl;
-//                                break;
-
-//                            case 1:
-//                                game->PushState(OptionState::Instance());
-//                                break;
-//                            case 2:
-//                                game->Quit();
-//                                break;
-//                        }
                 }
-//            case SDL_KEYDOWN:
-//                switch(event.key.keysym.sym)
-//                {
-//                    case SDLK_SPACE:
-//                        game->PushState(OptionState::Instance());
-//                        break;
-//                }
         }
     }
 }

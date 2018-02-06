@@ -16,6 +16,7 @@
 #include "deadstate.h"
 #include "introstate.h"
 #include "foreststate.h"
+#include "seatownstate.h"
 #include "global.h"
 
 MountainState MountainState::m_MountainState;
@@ -205,7 +206,8 @@ void MountainState::HandleEvents(Game* game) //put our exit function back in bus
                                 break;
 
                             case 2:
-                                std::cout << "sea state" << std::endl;
+                                game->ChangeState(SeaTownState::Instance());
+//                                std::cout << "sea state" << std::endl;
                                 break;
 
                             case 4:
@@ -218,7 +220,8 @@ void MountainState::HandleEvents(Game* game) //put our exit function back in bus
                         switch (MountainState::text_selector)
                         {
                             case 0:
-                                std::cout << "sea state" << std::endl;
+                                game->ChangeState(SeaTownState::Instance());
+//                                std::cout << "sea state" << std::endl;
                             break;
                         }
                         break;
