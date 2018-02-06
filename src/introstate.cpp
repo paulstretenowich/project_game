@@ -232,6 +232,14 @@ void IntroState::HandleEvents(Game* game) //put our exit function back in busine
                         game->ChangeState(SeaTownState::Instance());
                         break;
 
+                    case SDLK_F5:
+                        game->ChangeState(SeaState::Instance());
+                        break;
+
+                    case SDLK_F6:
+                        game->ChangeState(CastleState::Instance());
+                        break;
+
 //                    case SDLK_UP:
 //            //                    std::cout << "up" << std::endl;
 //                        if (IntroState::position > 0)

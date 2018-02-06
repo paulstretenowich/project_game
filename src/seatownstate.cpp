@@ -16,6 +16,8 @@
 #include "deadstate.h"
 #include "introstate.h"
 #include "foreststate.h"
+#include "seastate.h"
+#include "castlestate.h"
 #include "global.h"
 
 SeaTownState SeaTownState::m_SeaTownState;
@@ -153,13 +155,13 @@ void SeaTownState::HandleEvents(Game* game) //put our exit function back in busi
                                 break;
 
                             case 2:
-                                std::cout << "sea state" << std::endl;
-//                                game->ChangeState(DeadState::Instance());
+//                                std::cout << "sea state" << std::endl;
+                                game->ChangeState(SeaState::Instance());
                                 break;
 
                             case 4:
-                                std::cout << "sea state" << std::endl;
-//                                game->ChangeState(DeadState::Instance());
+//                                std::cout << "sea state" << std::endl;
+                                game->ChangeState(SeaState::Instance());
                                 break;
 
                             case 5:
@@ -184,8 +186,8 @@ void SeaTownState::HandleEvents(Game* game) //put our exit function back in busi
                                 break;
 
                             case 3:
-                                std::cout << "castle state" << std::endl;
-//                                game->ChangeState(DeadState::Instance());
+//                                std::cout << "castle state" << std::endl;
+                                game->ChangeState(CastleState::Instance());
                                 break;
                         }
                         break;
@@ -198,7 +200,7 @@ void SeaTownState::HandleEvents(Game* game) //put our exit function back in busi
                                 break;
 
                             case 2:
-                                std::cout << "sea state" << std::endl;
+                                game->ChangeState(SeaState::Instance());
                                 break;
 
                             case 3:
