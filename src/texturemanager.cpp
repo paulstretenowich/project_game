@@ -29,7 +29,7 @@ SDL_Texture* TextureManager::LoadTextureFontInstruction(const char* text, SDL_Re
 //    std::cout << font << std::endl;
     TTF_Font* tmp_font = TTF_OpenFont("../fonts/almendra/Almendra-Regular.ttf", 23);
     SDL_Color tmp_color = {0, 0, 0};
-    SDL_Surface* tempSurface = TTF_RenderUTF8_Blended_Wrapped(tmp_font, text, tmp_color, size.x-40);
+    SDL_Surface* tempSurface = TTF_RenderUTF8_Blended_Wrapped(tmp_font, text, tmp_color, size.x/2);
     SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::m_pRenderer, tempSurface);
     SDL_FreeSurface(tempSurface);
     TTF_CloseFont(tmp_font);
@@ -99,7 +99,7 @@ void TextureManager::DrawFontInstruction(SDL_Renderer *renderer, SDL_Texture *te
     dest.w = texW;//400;
     dest.h = texH;//120;
     dest.x = size.x/2 - dest.w/2;
-    dest.y = size.y*4/12 - dest.h/2;
+    dest.y = size.y/2 - dest.h/2;
     SDL_RenderCopy(renderer, tex, NULL, &dest);
 }
 

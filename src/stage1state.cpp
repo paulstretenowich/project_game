@@ -15,6 +15,7 @@
 #include "stage1state.h"
 #include "deadstate.h"
 #include "introstate.h"
+#include "foreststate.h"
 #include "global.h"
 
 Stage1State Stage1State::m_Stage1State;
@@ -26,7 +27,7 @@ void Stage1State::Init()
     SDL_GetRendererOutputSize(Game::m_pRenderer, &size.x, &size.y);
 
     Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024);
-    Mix_Music* background_menu_music = Mix_LoadMUS("../music/stage1_zelda.ogg");
+    Mix_Music* background_menu_music = Mix_LoadMUS("../music/stage1.ogg");
     Mix_PlayMusic(background_menu_music, -1);
 
 //    SDL_GetRendererOutputSize(Game::m_pRenderer, &size.x, &size.y);
@@ -71,6 +72,7 @@ void Stage1State::Init()
                                                  "2. Vous vous dirigez vers le bord de mer.\n"
                                                  "3. Vous préferez les régions montagneuses.",
                                                  size);
+    text7 = TextureManager::LoadTextureFontStory("Malheureusement vous mourrez de vos blessures accumulées durant votre aventure.", size);
 
     text_selector = 0;
 
@@ -88,6 +90,7 @@ std::vector<SDL_Texture*> Stage1State::ChangeText()
     vecOfText.push_back(text4);
     vecOfText.push_back(text5);
     vecOfText.push_back(text6);
+    vecOfText.push_back(text7);
     return vecOfText;
 }
 
@@ -110,6 +113,7 @@ void Stage1State::Clean()
     SDL_DestroyTexture(text4);
     SDL_DestroyTexture(text5);
     SDL_DestroyTexture(text6);
+    SDL_DestroyTexture(text7);
     printf("Stage1State Clean Successful\n");
 }
 
@@ -147,10 +151,10 @@ void Stage1State::HandleEvents(Game* game) //put our exit function back in busin
                         {
                             case 1:
                                 Global::ModifyCiri(-1);
-                                Global::ModifyLife(rand() % (3 - 1 + 1) + 1);
+                                Global::ModifyLife(-(rand() % (3 - 1 + 1) + 1));
                                 if (Global::CheckLife() <= 0)
                                 {
-                                    game->ChangeState(DeadState::Instance());
+                                    Stage1State::text_selector = 6;
                                 }
                                 else
                                 {
@@ -164,7 +168,12 @@ void Stage1State::HandleEvents(Game* game) //put our exit function back in busin
                                 break;
 
                             case 3:
+                                Global::ModifyCiri(-2);
                                 Stage1State::text_selector = 5;
+                                break;
+
+                            case 6:
+                                game->ChangeState(DeadState::Instance());
                                 break;
                         }
                         break;
@@ -177,13 +186,13 @@ void Stage1State::HandleEvents(Game* game) //put our exit function back in busin
                                 break;
 //
                             case 4:
-                                std::cout << "forest state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
+//                                std::cout << "forest state" << std::endl;
+                                game->ChangeState(ForestState::Instance());
                                 break;
 
                             case 5:
-                                std::cout << "forest state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
+//                                std::cout << "forest state" << std::endl;
+                                game->ChangeState(ForestState::Instance());
                                 break;
                         }
                         break;

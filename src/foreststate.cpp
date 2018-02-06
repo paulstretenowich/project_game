@@ -26,7 +26,7 @@ void ForestState::Init()
     SDL_GetRendererOutputSize(Game::m_pRenderer, &size.x, &size.y);
 
     Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024);
-    Mix_Music* background_menu_music = Mix_LoadMUS("../music/stage1_zelda.ogg");
+    Mix_Music* background_menu_music = Mix_LoadMUS("../music/forest_zelda.ogg");
     Mix_PlayMusic(background_menu_music, -1);
 
 //    SDL_GetRendererOutputSize(Game::m_pRenderer, &size.x, &size.y);
@@ -36,42 +36,29 @@ void ForestState::Init()
     background_text = TextureManager::LoadTextureImg("../images/background_story/background_text.png");
 
     aragorn = TextureManager::LoadTextureImg("../images/characters/aragorn/Face.png");
-    aragorn_fight = TextureManager::LoadTextureImg("../images/characters/aragorn/BtlFace_D.png");
+    aragorn_fight_injury = TextureManager::LoadTextureImg("../images/characters/aragorn/BtlFace_D.png");
+    aragorn_fight = TextureManager::LoadTextureImg("../images/characters/aragorn/BtlFace_flip.png");
 
-    ciri = TextureManager::LoadTextureImg("../images/characters/ciri/Face.png");
-    ciri_fight = TextureManager::LoadTextureImg("../images/characters/ciri/BtlFace_C.png");
+    guard = TextureManager::LoadTextureImg("../images/characters/guard/BtlFace.png");
 
     next = TextureManager::LoadTextureFontStoryNextPage();
     choice = TextureManager::LoadTextureFontStoryChoice();
 
-    text1 = TextureManager::LoadTextureFontStory("Vous avez bravement échappé aux bandits. Vous décidez donc de suivre le chemin qui s'offre à vous, en cette journée ensoleillé. Vous voyez une personne au loin en train de dormir sous l'ombre d'un arbre. Que faites vous ?\n"
-                                                 "1. Vous l'ignorez complètement.\n"
-                                                 "2. Vous décidez de lui dérober ses affaires.\n"
-                                                 "3. Vous la réveillez doucement afin de lancer la discussion.\n"
-                                                 "4. Vous lui ôtez la vie et vous récupérez tout ce qui peut être utile.",
+    text1 = TextureManager::LoadTextureFontStory("En vous enfonçant dans la forêt vous tombez nez à nez avec l'un de vos ennemis, un garde du comte Geralt Lannister.\n"
+                                                 "Que faites vous ?\n"
+                                                 "1. Vous Fuyez.\n"
+                                                 "2. Vous l'attaquez.\n"
+                                                 "3. Vous vous mettez en position de combat.",
                                                  size);
-    text2 = TextureManager::LoadTextureFontStory("Vous vous faites prendra la main dans le sac. Elle vous met en fuite et vous blesse.",
+    text2 = TextureManager::LoadTextureFontStory("Le garde alerte le reste de la patrouille. Ils vous rattrapent et vous torture à mort.",
                                                  size);
-    text3 = TextureManager::LoadTextureFontStory("Il se trouve que cette charmante demoiselle, Ciri, est une aventurière tout comme vous.\n"
-                                                 "En manque de compagnie, vous lui proposez de faire route avec elle jusqu'à la nuit pour partager un repas et plus si affinité.\n"
-                                                 "Elle accepte volontiers et vous passez un excellent moment ensemble.\n"
-                                                 "Après avoir passé une magnifique nuit, vous vous réveillez seul.",
+    text3 = TextureManager::LoadTextureFontStory("Vous arrivez à le maîtriser assez rapidement mais il vous blesse légèrement pendant le combat.\n"
+                                                 "Vous vous dirigez avec hâte vers la mer pour éviter d'alerter le reste de la garde.",
                                                  size);
-    text4 = TextureManager::LoadTextureFontStory("Après avoir rendu son sommeil définitif, vous remarquez que c'était une jeune aventurière. Malgré une fouille très appronfondie, vous ne trouvez rien d'interessant.",
+    text4 = TextureManager::LoadTextureFontStory("Il vous attaque mais ayant anticipé l'affrontement, vous êtes capable de le maîtriser sans subir de représaille.\n"
+                                                 "Vous vous dirigez dans la direction opposée du château du comte, vers la mer.",
                                                  size);
-    text5 = TextureManager::LoadTextureFontStory("Après un certain temps de marche vous arrivez à une intersection. Vous vous rappelez que Ciri disait que la région montagneuse montrait des signes d'activités.\n"
-                                                 "Trois choix s'offrent à vous :\n"
-                                                 "1. Vous décidez de continuer dans la forêt.\n"
-                                                 "2. Vous vous dirigez vers le bord de mer.\n"
-                                                 "3. Vous préferez les régions montagneuses.",
-                                                 size);
-    text6 = TextureManager::LoadTextureFontStory("Après un certain temps de marche vous arrivez à une intersection.\n"
-                                                 "Trois choix s'offre à vous :\n"
-                                                 "1. Vous décidez de continuer dans la forêt.\n"
-                                                 "2. Vous vous dirigez vers le bord de mer.\n"
-                                                 "3. Vous préferez les régions montagneuses.",
-                                                 size);
-
+    text5 = TextureManager::LoadTextureFontStory("Malheureusement vous mourrez de vos blessures accumulées durant votre aventure.", size);
     text_selector = 0;
 
 //    std::cout << Global::CheckLife() << std::endl;
@@ -87,7 +74,6 @@ std::vector<SDL_Texture*> ForestState::ChangeText()
     vecOfText.push_back(text3);
     vecOfText.push_back(text4);
     vecOfText.push_back(text5);
-    vecOfText.push_back(text6);
     return vecOfText;
 }
 
@@ -101,15 +87,14 @@ void ForestState::Clean()
     SDL_DestroyTexture(background);
     SDL_DestroyTexture(aragorn);
     SDL_DestroyTexture(aragorn_fight);
-    SDL_DestroyTexture(ciri);
-    SDL_DestroyTexture(ciri_fight);
+    SDL_DestroyTexture(aragorn_fight_injury);
+    SDL_DestroyTexture(guard);
     SDL_DestroyTexture(background_text);
     SDL_DestroyTexture(text1);
     SDL_DestroyTexture(text2);
     SDL_DestroyTexture(text3);
     SDL_DestroyTexture(text4);
     SDL_DestroyTexture(text5);
-    SDL_DestroyTexture(text6);
     printf("ForestState Clean Successful\n");
 }
 
@@ -146,25 +131,27 @@ void ForestState::HandleEvents(Game* game) //put our exit function back in busin
                         switch (ForestState::text_selector)
                         {
                             case 1:
-                                Global::ModifyCiri(-1);
-                                Global::ModifyLife(rand() % (3 - 1 + 1) + 1);
-                                if (Global::CheckLife() <= 0)
-                                {
-                                    game->ChangeState(DeadState::Instance());
-                                }
-                                else
-                                {
-                                    ForestState::text_selector = 5;
-                                }
+                                game->ChangeState(DeadState::Instance());
                                 break;
 
                             case 2:
-                                Global::ModifyCiri(1);
-                                ForestState::text_selector = 4;
+                                Global::ModifyLife(-(rand() % (3 - 1 + 1) + 1));
+                                if (Global::CheckLife() <= 0)
+                                {
+                                    ForestState::text_selector = 4;
+                                }
+                                else
+                                {
+                                    std::cout << "sea state" << std::endl;
+                                }
                                 break;
 
                             case 3:
-                                ForestState::text_selector = 5;
+                                std::cout << "sea state" << std::endl;
+                                break;
+
+                            case 4:
+                                game->ChangeState(DeadState::Instance());
                                 break;
                         }
                         break;
@@ -173,17 +160,7 @@ void ForestState::HandleEvents(Game* game) //put our exit function back in busin
                         switch (ForestState::text_selector)
                         {
                             case 0:
-                                ForestState::text_selector = 5;
-                                break;
-//
-                            case 4:
-                                std::cout << "forest state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
-                                break;
-
-                            case 5:
-                                std::cout << "forest state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
+                                ForestState::text_selector = 1;
                                 break;
                         }
                         break;
@@ -192,90 +169,20 @@ void ForestState::HandleEvents(Game* game) //put our exit function back in busin
                         switch (ForestState::text_selector)
                         {
                             case 0:
-                                ForestState::text_selector += 1;
-                                break;
-
-                            case 4:
-                                std::cout << "sea state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
-                                break;
-
-                            case 5:
-                                std::cout << "sea state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
+                                ForestState::text_selector = 2;
                                 break;
                         }
                         break;
 
-                case SDLK_3:
-                    switch (ForestState::text_selector)
-                    {
-                        case 0:
-                            ForestState::text_selector = 2;
+                    case SDLK_3:
+                        switch (ForestState::text_selector)
+                        {
+                            case 0:
+                                ForestState::text_selector = 3;
                             break;
-
-                        case 4:
-                            std::cout << "mountain state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
-                            break;
-
-                        case 5:
-                            std::cout << "mountain state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
-                            break;
-                    }
-                    break;
-
-                case SDLK_4:
-                    switch (ForestState::text_selector)
-                    {
-                        case 0:
-                            ForestState::text_selector = 3;
-                            break;
-                    }
-                    break;
-
-
-//                    case SDLK_UP:
-//            //                    std::cout << "up" << std::endl;
-//                        if (ForestState::position > 0)
-//                        {
-//                            ForestState::position -= 1;
-//                            ForestState::MoveSelector()[ForestState::position];
-//                        }
-//            //                    isRunning = false;
-//                        break;
-//                    case SDLK_DOWN:
-//            //                    std::cout << "down" << std::endl;
-//                        if (ForestState::position < 2)
-//                        {
-//                            ForestState::position += 1;
-//                            ForestState::MoveSelector()[ForestState::position];
-//                        }
-//            //                    isRunning = false;
-//                        break;
-//                    case SDLK_RETURN:
-//                        switch (ForestState::position)
-//                        {
-//                            case 0:
-//                                std::cout << "play" << std::endl;
-//                                break;
-
-//                            case 1:
-//                                game->PushState(OptionState::Instance());
-//                                break;
-//                            case 2:
-//                                game->Quit();
-//                                break;
-//                        }
+                        }
+                        break;
                 }
-//            case SDL_KEYDOWN:
-//                switch(event.key.keysym.sym)
-//                {
-//                    case SDLK_SPACE:
-//                        game->PushState(OptionState::Instance());
-//                        break;
-//                }
         }
     }
 }
@@ -292,42 +199,48 @@ void ForestState::Draw(Game* game)
 
     background_dest = TextureManager::DrawBackgroundStory(game->m_pRenderer, background, background_src, background_dest, size);
 
-    if (ForestState::text_selector == 2)
+    if (ForestState::text_selector == 1 || ForestState::text_selector == 2)
     {
-        ciri_src.x = ciri_src.y = 0;
-        ciri_dest.w = int(size.x*2/5 + 0.5);
-        ciri_dest.h = int(ciri_dest.w/1.2 + 0.5);
-        ciri_dest.x = background_dest.w*8/10 - ciri_dest.h/2;
-        ciri_dest.y = background_dest.h*2/3 - ciri_dest.w/2 + 5;
-        TextureManager::Draw(game->m_pRenderer, ciri, ciri_src, ciri_dest);
-        aragorn_src.x = aragorn_src.y = 0;
-        aragorn_dest.w = int(size.x*2/5 + 0.5);
-        aragorn_dest.h = int(aragorn_dest.w/1.2 + 0.5);
-        aragorn_dest.x = background_dest.w*5/10 - aragorn_dest.h/2;
-        aragorn_dest.y = background_dest.h*2/3 - aragorn_dest.w/2 + 5;
-        TextureManager::Draw(game->m_pRenderer, aragorn, aragorn_src, aragorn_dest);
+        guard_src.x = guard_src.y = 0;
+        guard_dest.w = int(size.x*2/5 + 0.5);
+        guard_dest.h = int(guard_dest.w/1.2 + 0.5);
+        guard_dest.x = background_dest.w*4/10 - guard_dest.h/2;
+        guard_dest.y = background_dest.h*2/3 - guard_dest.w/2 + 5;
+        TextureManager::Draw(game->m_pRenderer, guard, guard_src, guard_dest);
+        aragorn_fight_injury_src.x = aragorn_fight_injury_src.y = 0;
+        aragorn_fight_injury_dest.w = int(size.x*2/5 + 0.5);
+        aragorn_fight_injury_dest.h = int(aragorn_fight_injury_dest.w/1.2 + 0.5);
+        aragorn_fight_injury_dest.x = background_dest.w*8/10 - aragorn_fight_injury_dest.h/2;
+        aragorn_fight_injury_dest.y = background_dest.h*2/3 - aragorn_fight_injury_dest.w/2 + 5;
+        TextureManager::Draw(game->m_pRenderer, aragorn_fight_injury, aragorn_fight_injury_src, aragorn_fight_injury_dest);
     }
-    else if (ForestState::text_selector == 1)
+    else if (ForestState::text_selector == 3)
     {
-        ciri_fight_src.x = ciri_fight_src.y = 0;
-        ciri_fight_dest.w = int(size.x*2/5 + 0.5);
-        ciri_fight_dest.h = int(ciri_fight_dest.w/1.2 + 0.5);
-        ciri_fight_dest.x = background_dest.w*3/10 - ciri_fight_dest.h/2;
-        ciri_fight_dest.y = background_dest.h*2/3 - ciri_fight_dest.w/2 + 5;
-        TextureManager::Draw(game->m_pRenderer, ciri_fight, ciri_fight_src, ciri_fight_dest);
+        guard_src.x = guard_src.y = 0;
+        guard_dest.w = int(size.x*2/5 + 0.5);
+        guard_dest.h = int(guard_dest.w/1.2 + 0.5);
+        guard_dest.x = background_dest.w*3/10 - guard_dest.h/2;
+        guard_dest.y = background_dest.h*2/3 - guard_dest.w/2 + 5;
+        TextureManager::Draw(game->m_pRenderer, guard, guard_src, guard_dest);
         aragorn_fight_src.x = aragorn_fight_src.y = 0;
         aragorn_fight_dest.w = int(size.x*2/5 + 0.5);
         aragorn_fight_dest.h = int(aragorn_fight_dest.w/1.2 + 0.5);
-        aragorn_fight_dest.x = background_dest.w*8/10 - aragorn_fight_dest.h/2;
+        aragorn_fight_dest.x = background_dest.w*7/10 - aragorn_fight_dest.h/2;
         aragorn_fight_dest.y = background_dest.h*2/3 - aragorn_fight_dest.w/2 + 5;
         TextureManager::Draw(game->m_pRenderer, aragorn_fight, aragorn_fight_src, aragorn_fight_dest);
     }
     else
     {
+        guard_src.x = guard_src.y = 0;
+        guard_dest.w = int(size.x*2/5 + 0.5);
+        guard_dest.h = int(guard_dest.w/1.2 + 0.5);
+        guard_dest.x = background_dest.w*4/10 - guard_dest.h/2;
+        guard_dest.y = background_dest.h*2/3 - guard_dest.w/2 + 5;
+        TextureManager::Draw(game->m_pRenderer, guard, guard_src, guard_dest);
         aragorn_src.x = aragorn_src.y = 0;
         aragorn_dest.w = int(size.x*2/5 + 0.5);
         aragorn_dest.h = int(aragorn_dest.w/1.2 + 0.5);
-        aragorn_dest.x = background_dest.w*5/10 - aragorn_dest.h/2;
+        aragorn_dest.x = background_dest.w*8/10 - aragorn_dest.h/2;
         aragorn_dest.y = background_dest.h*2/3 - aragorn_dest.w/2 + 5;
         TextureManager::Draw(game->m_pRenderer, aragorn, aragorn_src, aragorn_dest);
     }

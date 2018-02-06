@@ -23,7 +23,11 @@ set(
     ${PROJECT_SOURCE_DIR}/deadstate.cpp
     ${PROJECT_SOURCE_DIR}/stage1state.cpp
     ${PROJECT_SOURCE_DIR}/foreststate.cpp
-#    ${PROJECT_SOURCE_DIR}/menu.cpp
+    ${PROJECT_SOURCE_DIR}/mountainstate.cpp
+    ${PROJECT_SOURCE_DIR}/seatownstate.cpp
+    ${PROJECT_SOURCE_DIR}/seastate.cpp
+    ${PROJECT_SOURCE_DIR}/castlestate.cpp
+    ${PROJECT_SOURCE_DIR}/endstate.cpp
     ${PROJECT_SOURCE_DIR}/texturemanager.cpp
     )
 

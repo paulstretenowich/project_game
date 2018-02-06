@@ -15,8 +15,10 @@
 #include "texturemanager.h"
 #include "introstate.h"
 #include "deadstate.h"
+#include "endstate.h"
 #include "stage1state.h"
 #include "foreststate.h"
+#include "mountainstate.h"
 #include "global.h"
 
 IntroState IntroState::m_IntroState;
@@ -218,6 +220,10 @@ void IntroState::HandleEvents(Game* game) //put our exit function back in busine
                     case SDLK_F2:
                         game->ChangeState(ForestState::Instance());
                         break;
+
+                case SDLK_F3:
+                    game->ChangeState(MountainState::Instance());
+                    break;
 
 //                    case SDLK_UP:
 //            //                    std::cout << "up" << std::endl;

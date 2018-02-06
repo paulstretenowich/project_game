@@ -19,7 +19,12 @@ void InstructionState::Init()
 
     title = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 60, 0, 0, 0, "Instructions");
 
-    instructions = TextureManager::LoadTextureFontInstruction("pwet",
+    instructions = TextureManager::LoadTextureFontInstruction("Vous allez incarner un personnage dont vous êtes le maitre des décisions.\n"
+                                                              "Chacune d'entre elles pourra avoir des répercussions sur la suite de l'histoire.\n"
+                                                              "Attention!\n"
+                                                              "Les évènements sont aléatoires, les mêmes choix peuvent amener à différentes conséquences.\n"
+                                                              "Si vous voulez découvrir différentes issues, n'hésitez pas à le recommencer avec des choix différents (ou pas).\n"
+                                                              "Bonne chance ! Que la force soit avec vous (et avec votre esprit)!",
                                                               size);
 
     back = TextureManager::LoadTextureImg("../images/menu/button.png");
@@ -127,8 +132,8 @@ void InstructionState::Draw(Game* game)
     back_font_dest.h = texH;//back_dest.h*2/3;
     back_dest.x = size.x/2 - back_dest.w/2;
     back_font_dest.x = size.x/2 - back_font_dest.w/2;
-    back_dest.y = size.y*9/12 - back_dest.h/2;
-    back_font_dest.y = size.y*9/12 - back_font_dest.h/2;
+    back_dest.y = size.y*12/15 - back_dest.h/2;
+    back_font_dest.y = size.y*12/15 - back_font_dest.h/2;
     TextureManager::Draw(game->m_pRenderer, back, back_src, back_dest);
     TextureManager::Draw(game->m_pRenderer, back_font, back_font_src, back_font_dest);
 

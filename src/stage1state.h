@@ -45,7 +45,7 @@ protected:
     SDL_Texture* ciri, * ciri_fight;
     SDL_Rect ciri_src, ciri_dest, ciri_fight_src, ciri_fight_dest;
 
-    SDL_Texture* text1, * text2, * text3, * text4, * text5, * text6;
+    SDL_Texture* text1, * text2, * text3, * text4, * text5, * text6, * text7;
     SDL_Rect text_src, text_dest;
 
     SDL_Rect size;
