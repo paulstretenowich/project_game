@@ -16,10 +16,13 @@
 #include "introstate.h"
 #include "deadstate.h"
 #include "stage1state.h"
+#include "foreststate.h"
 #include "global.h"
 
 IntroState IntroState::m_IntroState;
 int Global::life;
+int Global::ciri = 0;
+int Global::money = 0;
 
 //int life;
 
@@ -68,7 +71,10 @@ void IntroState::Init()
                                                  "Vous arrivez à l'abattre mais vous ne faites pas long feu face à ces camarades...\n"
                                                  "Peut-être aurez-vous plus de chance la prochaine fois ... ?",
                                                  size);
-    text6 = TextureManager::LoadTextureFontStory("Quelle idée de se lancer seul contre une troupe de bandits ! Vous n'êtes pas un super héros !\n"
+    text6 = TextureManager::LoadTextureFontStory("Vous tombez nez à nez avec l'un des bandits qui vient de se réveiller de sa sieste.\n"
+                                                 "Vous arrivez à l'abattre mais il vous blesse.\n",
+                                                 size);
+    text7 = TextureManager::LoadTextureFontStory("Quelle idée de se lancer seul contre une troupe de bandits ! Vous n'êtes pas un super héros !\n"
                                                  "Aragorn : Je t'avais dit de faire attention ! Ah ces jeunes...",
                                                  size);
 
@@ -76,7 +82,7 @@ void IntroState::Init()
 
 
     Global::GenerateLife();
-    std::cout << Global::CheckLife() << std::endl;
+//    std::cout << Global::CheckLife() << std::endl;
 
     printf("IntroState Init Successful\n");
 }
@@ -90,6 +96,7 @@ std::vector<SDL_Texture*> IntroState::ChangeText()
     vecOfText.push_back(text4);
     vecOfText.push_back(text5);
     vecOfText.push_back(text6);
+    vecOfText.push_back(text7);
     return vecOfText;
 }
 
@@ -110,6 +117,7 @@ void IntroState::Clean()
     SDL_DestroyTexture(text4);
     SDL_DestroyTexture(text5);
     SDL_DestroyTexture(text6);
+    SDL_DestroyTexture(text7);
     printf("IntroState Clean Successful\n");
 }
 
@@ -143,13 +151,28 @@ void IntroState::HandleEvents(Game* game) //put our exit function back in busine
                         break;
 
                     case SDLK_SPACE:
-                        if (IntroState::text_selector < IntroState::ChangeText().size()-1 && IntroState::text_selector != 2 && IntroState::text_selector != 3 && IntroState::text_selector != 4)
+                        switch (IntroState::text_selector)
                         {
-                            IntroState::text_selector += 1;
-                        }
-                        else if (IntroState::text_selector == 4 || IntroState::text_selector == 5)
-                        {
-                            game->ChangeState(DeadState::Instance());
+                            case 0:
+                                IntroState::text_selector += 1;
+                                break;
+
+                            case 1:
+                                IntroState::text_selector += 1;
+                                break;
+
+                            case 4:
+                                game->ChangeState(DeadState::Instance());
+                                break;
+
+                            case 5:
+                                Global::ModifyLife(-(rand() % (3 - 2 + 1) + 2));
+                                game->ChangeState(Stage1State::Instance());
+                                break;
+
+                            case 6:
+                                game->ChangeState(DeadState::Instance());
+                                break;
                         }
                         break;
 
@@ -157,7 +180,7 @@ void IntroState::HandleEvents(Game* game) //put our exit function back in busine
                         switch (IntroState::text_selector)
                         {
                             case 2:
-                                IntroState::text_selector = 5;
+                                IntroState::text_selector = 6;
                                 break;
 //
                             case 3:
@@ -183,13 +206,17 @@ void IntroState::HandleEvents(Game* game) //put our exit function back in busine
                                 break;
 
                             case 3:
-                                IntroState::text_selector += 1;
+                                IntroState::text_selector += 2;
                                 break;
                         }
                         break;
 
                     case SDLK_F1:
                         game->ChangeState(Stage1State::Instance());
+                        break;
+
+                    case SDLK_F2:
+                        game->ChangeState(ForestState::Instance());
                         break;
 
 //                    case SDLK_UP:
@@ -248,7 +275,7 @@ void IntroState::Draw(Game* game)
 
     background_dest = TextureManager::DrawBackgroundStory(game->m_pRenderer, background, background_src, background_dest, size);
 
-    if (IntroState::text_selector == 4 || IntroState::text_selector == 5)
+    if (IntroState::text_selector == 4 || IntroState::text_selector == 5 || IntroState::text_selector == 6)
     {
         aragorn_fight_src.x = aragorn_fight_src.y = 0;
         aragorn_fight_dest.w = int(size.x*2/5 + 0.5);

@@ -40,13 +40,10 @@ protected:
     SDL_Texture* background_text;
     SDL_Rect background_text_src, background_text_dest;
 
-    SDL_Texture* aragorn;
-    SDL_Rect aragorn_src, aragorn_dest;
+    SDL_Texture* aragorn, * aragorn_fight;
+    SDL_Rect aragorn_src, aragorn_dest, aragorn_fight_src, aragorn_fight_dest;
 
-    SDL_Texture* aragorn_fight;
-    SDL_Rect aragorn_fight_src, aragorn_fight_dest;
-
-    SDL_Texture* text1, * text2, * text3, * text4, * text5, * text6;
+    SDL_Texture* text1, * text2, * text3, * text4, * text5, * text6, * text7;
     SDL_Rect text_src, text_dest;
 
     SDL_Rect size;

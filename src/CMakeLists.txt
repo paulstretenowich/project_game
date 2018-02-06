@@ -22,6 +22,7 @@ set(
     ${PROJECT_SOURCE_DIR}/introstate.cpp
     ${PROJECT_SOURCE_DIR}/deadstate.cpp
     ${PROJECT_SOURCE_DIR}/stage1state.cpp
+    ${PROJECT_SOURCE_DIR}/foreststate.cpp
 #    ${PROJECT_SOURCE_DIR}/menu.cpp
     ${PROJECT_SOURCE_DIR}/texturemanager.cpp
     )

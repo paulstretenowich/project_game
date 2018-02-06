@@ -15,6 +15,7 @@
 #include "stage1state.h"
 #include "deadstate.h"
 #include "introstate.h"
+#include "foreststate.h"
 #include "global.h"
 
 Stage1State Stage1State::m_Stage1State;
@@ -177,13 +178,13 @@ void Stage1State::HandleEvents(Game* game) //put our exit function back in busin
                                 break;
 //
                             case 4:
-                                std::cout << "forest state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
+//                                std::cout << "forest state" << std::endl;
+                                game->ChangeState(ForestState::Instance());
                                 break;
 
                             case 5:
-                                std::cout << "forest state" << std::endl;
-//                                    game->ChangeState(DeadState::Instance());
+//                                std::cout << "forest state" << std::endl;
+                                game->ChangeState(ForestState::Instance());
                                 break;
                         }
                         break;
