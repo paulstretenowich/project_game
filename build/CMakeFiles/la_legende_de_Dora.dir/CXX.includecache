@@ -527,6 +527,8 @@ seastate.h
 /Users/paul/Documents/ISBS/ISBS3/c++/dvlp_projet_jeu/src/seastate.h
 castlestate.h
 /Users/paul/Documents/ISBS/ISBS3/c++/dvlp_projet_jeu/src/castlestate.h
+endstate.h
+/Users/paul/Documents/ISBS/ISBS3/c++/dvlp_projet_jeu/src/endstate.h
 global.h
 /Users/paul/Documents/ISBS/ISBS3/c++/dvlp_projet_jeu/src/global.h
 
