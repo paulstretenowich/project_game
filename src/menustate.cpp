@@ -32,57 +32,20 @@ void MenuState::Init()
 
     quit_button = TextureManager::LoadTextureImg("../images/menu/button.png");
     quit_button_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Quitter");
-//    quit_button_src.x = quit_button_src.y = 0;
-//    quit_button_dest.w = 300;
-//    quit_button_font_dest.w = quit_button_dest.w*2/3;
-//    quit_button_dest.h = 50;
-//    quit_button_font_dest.h = quit_button_dest.h*2/3;
-//    quit_button_dest.x = size.x/2 - quit_button_dest.w/2;
-//    quit_button_font_dest.x = size.x/2 - quit_button_font_dest.w/2;
-//    quit_button_dest.y = size.y*5/8 - quit_button_dest.h/2;
-//    quit_button_font_dest.y = size.y*5/8 - quit_button_font_dest.h/2;
 
     play_button = TextureManager::LoadTextureImg("../images/menu/button.png");
     play_button_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Jouer");
-//    play_button_src.x = play_button_src.y = 0;
-//    play_button_dest.w = 300;
-//    play_button_font_dest.w = play_button_dest.w*2/3;
-//    play_button_dest.h = 50;
-//    play_button_font_dest.h = play_button_dest.h*2/3;
-//    play_button_dest.x = size.x/2 - play_button_dest.w/2;
-//    play_button_font_dest.x = size.x/2 - play_button_font_dest.w/2;
-//    play_button_dest.y = size.y*3/8 - play_button_dest.h/2;
-//    play_button_font_dest.y = size.y*3/8 - play_button_font_dest.h/2;
 
     selector = TextureManager::LoadTextureImg("../images/menu/menu_selector.png");
-//    selector_src.x = selector_src.y = 0;
-//    selector_dest.x = play_button_dest.x - 1;
-//    selector_dest.y = play_button_dest.y - 1;
-//    selector_dest.w = play_button_dest.w + 1;
-//    selector_dest.h = play_button_dest.h + 1;
 
     option_button = TextureManager::LoadTextureImg("../images/menu/button.png");
     option_button_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Options");
 
     instruction_button = TextureManager::LoadTextureImg("../images/menu/button.png");
     instruction_button_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Instructions");
-//    option_button_src.x = option_button_src.y = 0;
-//    option_button_dest.w = 300;
-//    option_button_font_dest.w = option_button_dest.w*2/3;
-//    option_button_dest.h = 50;
-//    option_button_font_dest.h = option_button_dest.h*2/3;
-//    option_button_dest.x = size.x/2 - option_button_dest.w/2;
-//    option_button_font_dest.x = size.x/2 - option_button_font_dest.w/2;
-//    option_button_dest.y = size.y*4/8 - option_button_dest.h/2;
-//    option_button_font_dest.y = size.y*4/8 - option_button_font_dest.h/2;
 
     title = TextureManager::LoadTextureFont("../fonts/Triforce.ttf", 60, 0, 0, 0, "La Legende de Dora...");
     title2 = TextureManager::LoadTextureFont("../fonts/Triforce.ttf", 40, 0, 0, 0, "...l'exploratrice ?");
-//    title_src.x = title_src.y = 0;
-//    title_dest.w = 400;
-//    title_dest.h = 120;
-//    title_dest.x = size.x/2-title_dest.w/2;
-//    title_dest.y = 50;
 
     position = 0;
 //    menuSprite = NULL; // set pointer to NULL;
@@ -263,13 +226,6 @@ void MenuState::HandleEvents(Game* game) //put our exit function back in busines
                                 break;
                         }
                 }
-//            case SDL_KEYDOWN:
-//                switch(event.key.keysym.sym)
-//                {
-//                    case SDLK_SPACE:
-//                        game->PushState(OptionState::Instance());
-//                        break;
-//                }
         }
     }
 }

@@ -75,46 +75,7 @@ void DeadState::HandleEvents(Game* game) //put our exit function back in busines
                     case SDLK_SPACE:
                     game->ChangeState(MenuState::Instance());
                     break;
-//                    case SDLK_UP:
-//            //                    std::cout << "up" << std::endl;
-//                        if (DeadState::position > 0)
-//                        {
-//                            DeadState::position -= 1;
-//                            DeadState::MoveSelector()[DeadState::position];
-//                        }
-//            //                    isRunning = false;
-//                        break;
-//                    case SDLK_DOWN:
-//            //                    std::cout << "down" << std::endl;
-//                        if (DeadState::position < 2)
-//                        {
-//                            DeadState::position += 1;
-//                            DeadState::MoveSelector()[DeadState::position];
-//                        }
-//            //                    isRunning = false;
-//                        break;
-//                    case SDLK_RETURN:
-//                        switch (DeadState::position)
-//                        {
-//                            case 0:
-//                                std::cout << "play" << std::endl;
-//                                break;
-
-//                            case 1:
-//                                game->PushState(OptionState::Instance());
-//                                break;
-//                            case 2:
-//                                game->Quit();
-//                                break;
-//                        }
                 }
-//            case SDL_KEYDOWN:
-//                switch(event.key.keysym.sym)
-//                {
-//                    case SDLK_SPACE:
-//                        game->PushState(OptionState::Instance());
-//                        break;
-//                }
         }
     }
 }

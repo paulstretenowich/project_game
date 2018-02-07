@@ -17,11 +17,6 @@ public:
 
     void Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 
-//    void handleEvents();
-//    void update();
-//    void render();
-//    void clean();
-
 //    bool running() { return isRunning; }
 
 //    static void AddTile(int srcX, int srcY, int xpos, int ypos);

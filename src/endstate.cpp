@@ -75,46 +75,7 @@ void EndState::HandleEvents(Game* game) //put our exit function back in business
                     case SDLK_SPACE:
                     game->ChangeState(MenuState::Instance());
                     break;
-//                    case SDLK_UP:
-//            //                    std::cout << "up" << std::endl;
-//                        if (EndState::position > 0)
-//                        {
-//                            EndState::position -= 1;
-//                            EndState::MoveSelector()[EndState::position];
-//                        }
-//            //                    isRunning = false;
-//                        break;
-//                    case SDLK_DOWN:
-//            //                    std::cout << "down" << std::endl;
-//                        if (EndState::position < 2)
-//                        {
-//                            EndState::position += 1;
-//                            EndState::MoveSelector()[EndState::position];
-//                        }
-//            //                    isRunning = false;
-//                        break;
-//                    case SDLK_RETURN:
-//                        switch (EndState::position)
-//                        {
-//                            case 0:
-//                                std::cout << "play" << std::endl;
-//                                break;
-
-//                            case 1:
-//                                game->PushState(OptionState::Instance());
-//                                break;
-//                            case 2:
-//                                game->Quit();
-//                                break;
-//                        }
                 }
-//            case SDL_KEYDOWN:
-//                switch(event.key.keysym.sym)
-//                {
-//                    case SDLK_SPACE:
-//                        game->PushState(OptionState::Instance());
-//                        break;
-//                }
         }
     }
 }

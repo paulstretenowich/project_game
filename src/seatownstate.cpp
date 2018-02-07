@@ -18,6 +18,7 @@
 #include "foreststate.h"
 #include "seastate.h"
 #include "castlestate.h"
+#include "endstate.h"
 #include "global.h"
 
 SeaTownState SeaTownState::m_SeaTownState;
@@ -151,7 +152,7 @@ void SeaTownState::HandleEvents(Game* game) //put our exit function back in busi
                         switch (SeaTownState::text_selector)
                         {
                             case 0:
-                                game->ChangeState(DeadState::Instance());
+                                game->ChangeState(EndState::Instance());
                                 break;
 
                             case 2:

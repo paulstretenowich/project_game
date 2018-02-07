@@ -8,6 +8,7 @@ public:
         static void ModifyLife(int injury) { life += injury; }
         static int CheckLife() { return life; }
 
+        static void InitCiri() { ciri = 0; }
         static void ModifyCiri(int pwet) { ciri += pwet; }
         static int CheckCiri() { return ciri; }
 

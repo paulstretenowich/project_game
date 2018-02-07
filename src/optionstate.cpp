@@ -13,52 +13,21 @@ OptionState OptionState::m_OptionState;
 
 void OptionState::Init()
 {
-//    SDL_GetRendererOutputSize(Game::m_pRenderer, &size.x, &size.y);
 
-//	background = NULL;
     background = TextureManager::LoadTextureImg("../images/menu/menu_background_new_002.png");
 
     title = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 60, 0, 0, 0, "Options");
-//    title_src.x = title_src.y = 0;
-//    title_dest.w = 400;
-//    title_dest.h = 120;
-//    title_dest.x = size.x/2-title_dest.w/2;
-//    title_dest.y = 50;
 
     fullscreen_off = TextureManager::LoadTextureImg("../images/menu/button.png");
     fullscreen_off_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Plein écran");
-//    fullscreen_off_src.x = fullscreen_off_src.y = 0;
-//    fullscreen_off_dest.w = 300;
-//    fullscreen_off_font_dest.w = fullscreen_off_dest.w*2/3;
-//    fullscreen_off_dest.h = 50;
-//    fullscreen_off_font_dest.h = fullscreen_off_dest.h*2/3;
-//    fullscreen_off_dest.x = size.x/2 - fullscreen_off_dest.w/2;
-//    fullscreen_off_font_dest.x = size.x/2 - fullscreen_off_font_dest.w/2;
-//    fullscreen_off_dest.y = size.y*4/8 - fullscreen_off_dest.h/2;
-//    fullscreen_off_font_dest.y = size.y*4/8 - fullscreen_off_font_dest.h/2;
 
     fullscreen_on = TextureManager::LoadTextureImg("../images/menu/button.png");
     fullscreen_on_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Fenêtre");
-//    fullscreen_on_src.x = fullscreen_on_src.y = 0;
-//    fullscreen_on_dest.w = 300;
-//    fullscreen_on_font_dest.w = fullscreen_on_dest.w*1/2;
-//    fullscreen_on_dest.h = 50;
-//    fullscreen_on_font_dest.h = fullscreen_on_dest.h*2/3;
-//    fullscreen_on_dest.x = size.x/2 - fullscreen_on_dest.w/2;
-//    fullscreen_on_font_dest.x = size.x/2 - fullscreen_on_font_dest.w/2;
-//    fullscreen_on_dest.y = size.y*4/8 - fullscreen_on_dest.h/2;
-//    fullscreen_on_font_dest.y = size.y*4/8 - fullscreen_on_font_dest.h/2;
 
     back = TextureManager::LoadTextureImg("../images/menu/button.png");
     back_font = TextureManager::LoadTextureFont("../fonts/Dalelands Uncial.otf", 35, 255, 255, 255, "Retour");
 
     selector = TextureManager::LoadTextureImg("../images/menu/menu_selector.png");
-//    std::cout << selector << std::endl;
-//    selector_src.x = selector_src.y = 0;
-//    selector_dest.x = fullscreen_on_dest.x - 3;
-//    selector_dest.y = fullscreen_on_dest.y - 3;
-//    selector_dest.w = fullscreen_on_dest.w + 6;
-//    selector_dest.h = fullscreen_on_dest.h + 6;
 
     position = 0;
 
@@ -66,38 +35,17 @@ void OptionState::Init()
     printf("PauseState Init Successful\n");
 }
 
-//SDL_Rect fullscreen_buttonPosition(Game* game)
-//{
-//    if (game->FullscreenMode())
-//    {
-//        return fullscreen_on_dest;
-//    }
-//    else
-//    {
-//        return fullscreen_off_dest;
-//    }
-//}
-
 std::vector<SDL_Rect> OptionState::MoveSelector()
 {
 //    Game* game;
     std::vector<SDL_Rect> vecOfRec;
     SDL_Rect fullscreen;
-//    std::cout << "pwet" << std::endl;
-//    if (game->FullscreenMode())
-//    {
-        fullscreen.x = OptionState::fullscreen_buttonPosition().x - 3;
-        fullscreen.y = OptionState::fullscreen_buttonPosition().y - 3;
-        fullscreen.w = OptionState::fullscreen_buttonPosition().w + 6;
-        fullscreen.h = OptionState::fullscreen_buttonPosition().h + 6;
-//    }
-//    else
-//    {
-//        fullscreen.x = OptionState::fullscreen_buttonPosition().x - 3;
-//        fullscreen.y = OptionState::fullscreen_buttonPosition().y - 3;
-//        fullscreen.w = OptionState::fullscreen_buttonPosition().w + 6;
-//        fullscreen.h = OptionState::fullscreen_buttonPosition().h + 6;
-//    }
+
+    fullscreen.x = OptionState::fullscreen_buttonPosition().x - 3;
+    fullscreen.y = OptionState::fullscreen_buttonPosition().y - 3;
+    fullscreen.w = OptionState::fullscreen_buttonPosition().w + 6;
+    fullscreen.h = OptionState::fullscreen_buttonPosition().h + 6;
+
     vecOfRec.push_back(fullscreen);
     SDL_Rect back;
     back.x = OptionState::back_buttonPosition().x - 3;
@@ -211,19 +159,6 @@ void OptionState::HandleEvents(Game* game)
                         }
             //                    isRunning = false;
                         break;
-//                    case SDLK_RETURN:
-//                        switch (OptionState::position)
-//                        {
-//                            case 0:
-//                                std::cout << "play" << std::endl;
-//                                break;
-
-//                            case 1:
-//                                game->PushState(OptionState::Instance());
-//                                break;
-//                            case 2:
-//                                game->Quit();
-//                                break;
 
                     case SDLK_RETURN:
                         switch (OptionState::position)
@@ -250,14 +185,6 @@ void OptionState::HandleEvents(Game* game)
                                 break;
                         }
                 }
-
-//            case SDL_KEYDOWN:
-//                switch(event.key.keysym.sym)
-//                {
-//                    case SDLK_SPACE:
-//                        game->PopState();
-//                        break;
-//                }
         }
     }
 }
@@ -307,10 +234,7 @@ void OptionState::Draw(Game* game)
         fullscreen_on_font_dest.y = size.y*7/16 - fullscreen_on_font_dest.h/2;
         TextureManager::Draw(game->m_pRenderer, fullscreen_on, fullscreen_button_src, fullscreen_button_dest);
         TextureManager::Draw(game->m_pRenderer, fullscreen_on_font, fullscreen_on_font_src, fullscreen_on_font_dest);
-//        selector_dest.x = fullscreen_on_dest.x - 3;
-//        selector_dest.y = fullscreen_on_dest.y - 3;
-//        selector_dest.w = fullscreen_on_dest.w + 6;
-//        selector_dest.h = fullscreen_on_dest.h + 6;
+
     }
     else
     {
@@ -327,10 +251,6 @@ void OptionState::Draw(Game* game)
         fullscreen_off_font_dest.y = size.y*7/16 - fullscreen_off_font_dest.h/2;
         TextureManager::Draw(game->m_pRenderer, fullscreen_off, fullscreen_button_src, fullscreen_button_dest);
         TextureManager::Draw(game->m_pRenderer, fullscreen_off_font, fullscreen_off_font_src, fullscreen_off_font_dest);
-//        selector_dest.x = fullscreen_off_dest.x - 3;
-//        selector_dest.y = fullscreen_off_dest.y - 3;
-//        selector_dest.w = fullscreen_off_dest.w + 6;
-//        selector_dest.h = fullscreen_off_dest.h + 6;
     }
 
     SDL_QueryTexture(back_font, NULL, NULL, &texW, &texH);

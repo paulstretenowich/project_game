@@ -26,8 +26,8 @@
 
 IntroState IntroState::m_IntroState;
 int Global::life;
-int Global::ciri = 0;
-int Global::money = 0;
+int Global::ciri;
+int Global::money;
 
 //int life;
 
@@ -85,7 +85,7 @@ void IntroState::Init()
 
     text_selector = 0;
 
-
+    Global::InitCiri();
     Global::GenerateLife();
 //    std::cout << Global::CheckLife() << std::endl;
 
@@ -239,47 +239,7 @@ void IntroState::HandleEvents(Game* game) //put our exit function back in busine
                     case SDLK_F6:
                         game->ChangeState(CastleState::Instance());
                         break;
-
-//                    case SDLK_UP:
-//            //                    std::cout << "up" << std::endl;
-//                        if (IntroState::position > 0)
-//                        {
-//                            IntroState::position -= 1;
-//                            IntroState::MoveSelector()[IntroState::position];
-//                        }
-//            //                    isRunning = false;
-//                        break;
-//                    case SDLK_DOWN:
-//            //                    std::cout << "down" << std::endl;
-//                        if (IntroState::position < 2)
-//                        {
-//                            IntroState::position += 1;
-//                            IntroState::MoveSelector()[IntroState::position];
-//                        }
-//            //                    isRunning = false;
-//                        break;
-//                    case SDLK_RETURN:
-//                        switch (IntroState::position)
-//                        {
-//                            case 0:
-//                                std::cout << "play" << std::endl;
-//                                break;
-
-//                            case 1:
-//                                game->PushState(OptionState::Instance());
-//                                break;
-//                            case 2:
-//                                game->Quit();
-//                                break;
-//                        }
                 }
-//            case SDL_KEYDOWN:
-//                switch(event.key.keysym.sym)
-//                {
-//                    case SDLK_SPACE:
-//                        game->PushState(OptionState::Instance());
-//                        break;
-//                }
         }
     }
 }
