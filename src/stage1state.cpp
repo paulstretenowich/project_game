@@ -69,7 +69,7 @@ void Stage1State::Init()
                                                  "3. Vous préferez les régions montagneuses.",
                                                  size);
     text6 = TextureManager::LoadTextureFontStory("Après un certain temps de marche vous arrivez à une intersection.\n"
-                                                 "Trois choix s'offre à vous :\n"
+                                                 "Trois choix s'offrent à vous :\n"
                                                  "1. Vous décidez de continuer dans la forêt.\n"
                                                  "2. Vous vous dirigez vers le bord de mer.\n"
                                                  "3. Vous préferez les régions montagneuses.",

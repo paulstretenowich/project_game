@@ -59,7 +59,7 @@ void IntroState::Init()
                                                  "Aragorn : Hummm... Je vais lui rendre la parole sinon je vais me faire taper sur les doigts.",
                                                  size);
     text2 = TextureManager::LoadTextureFontStory("Je disais donc, vous êtes un héros qui voyage à travers les terres de l'extrême milieu.\n"
-                                                 "Pour quelles raisons ? la gloire ? la fortune ? l'amour ? Vous le déciderez avec vos choix tout au long de cette avanture.\n"
+                                                 "Pour quelles raisons ? la gloire ? la fortune ? l'amour ? Vous le déciderez avec vos choix tout au long de cette aventure.\n"
                                                  "C'est parti ! Allons-y let's go, c'est parti les amis !",
                                                  size);
     text3 = TextureManager::LoadTextureFontStory("Vous vous réveillez en plein milieu d'une forêt mais vous ne vous rappelez plus de ce qui s'est passé avant (attention l'abus d'alcool est dangereux pour la santé).\n"
