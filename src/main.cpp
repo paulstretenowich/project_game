@@ -11,6 +11,8 @@
 #include "menustate.h"
 #include "texturemanager.h"
 
+//#define nullptr NULL
+
 Game *game = nullptr;
 
 int main(int argc, char* argv[])

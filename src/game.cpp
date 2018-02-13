@@ -10,8 +10,7 @@
 
 #include "game.h"
 #include "gamestate.h"
-//#include "menu.h"
-//#include "texturemanager.h"
+//#define nullptr NULL
 
 SDL_Renderer* Game::m_pRenderer = nullptr;
 
