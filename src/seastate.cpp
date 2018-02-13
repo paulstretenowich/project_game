@@ -327,7 +327,7 @@ void SeaState::Draw(Game* game)
         aragorn_dest.y = background_dest.h*2/3 - aragorn_dest.w/2 + 5;
         TextureManager::Draw(game->m_pRenderer, aragorn, aragorn_src, aragorn_dest);
     }
-    else if (SeaState::text_selector == 4 || SeaState::text_selector == 5 || SeaState::text_selector == 8 || SeaState::text_selector == 12)
+    else if (SeaState::text_selector == 4 || SeaState::text_selector == 5 || SeaState::text_selector == 8 || SeaState::text_selector == 9 || SeaState::text_selector == 12)
     {
         aragorn_src.x = aragorn_src.y = 0;
         aragorn_dest.w = int(size.x*2/5 + 0.5);
